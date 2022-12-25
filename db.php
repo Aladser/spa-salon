@@ -1,6 +1,4 @@
 <?php
-    $activerUser = null;
-
     // ******* данные *******
     $users = [
         [
@@ -45,6 +43,8 @@
         ],        
     ];
 
+    $activerUser = null;
+
     // Список всех пользователей и хэшей их паролей
     function getUsersList(){
         global $users;
@@ -56,7 +56,7 @@
     }
 
     // поиск объекта в массиве объектов
-    function findObject($arr, $prop, $propValue){
+    function findObjectInArray($arr, $prop, $propValue){
         $search = array_filter($arr, fn($elem) => $elem[$prop]===$propValue);
         return count($search) != 0;
     }
@@ -64,20 +64,20 @@
     // проверяет существование пользователя
     function existsUser($login){
         global $users;
-        return findObject($users, 'login', $login);
+        return findObjectInArray($users, 'login', $login);
     }
     
     // аутентификация
     function checkPassword($login, $password){
         if(!existsUser($login)) return false;
 
-        $password = md5($password);
         global $users;
-        return findObject($users, 'password', $password);
+        return findObjectInArray($users, 'password', md5($password));
     }
 
     // получить активного пользователя
     function getCurrentUser(){
         return $activerUser;
     }
+    
 ?>
