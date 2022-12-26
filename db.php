@@ -69,8 +69,6 @@
     
     // аутентификация
     function checkPassword($login, $password){
-        if(!existsUser($login)) return false;
-
         global $users;
         return findObjectInArray($users, 'password', md5($password));
     }

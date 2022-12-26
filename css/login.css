@@ -1,0 +1,46 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.loginSection{
+    border: 1px dotted grey;
+    width: 30%;
+    margin: auto;
+    margin-top: 30px;
+    padding: 5px;
+}
+.loginSection__header{
+    padding-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-row{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 5px;
+    display: flex;
+}
+.form-row__label{
+    width: 25%;
+    text-align: left;
+    padding: 5px;
+}
+.form-btn-row{
+    margin-top: 1rem;
+    justify-content:center;
+    padding: 0.3rem;
+}
+
+.btn-submit{
+    background-color: white;
+    border: 1px solid grey;
+    width: 6.5rem;
+    padding: 0.4rem;
+}
+
+.error{
+    text-align: center;
+    color: red;
+    padding: 0.5rem 0rem;
+}
