@@ -1,76 +1,34 @@
 <?php
-    // ******* данные *******
-    $users = [
-        [
-            'login' => 'antonova_da',
-            'password' => md5('antonova_da'),
-        ],
-        [
-            'login' => 'tsoi_vr',
-            'password' => md5('tsoi_vr'),
-        ],
-        [
-            'login' => 'miljukov_vr',
-            'password' => md5('miljukov_vr'),
-        ],
-        [
-            'login' => 'rykalova_la',
-            'password' => md5('rykalova_la'),
-        ],
-        [
-            'login' => 'chuchui_vm',
-            'password' => md5('chuchui_vm'),
-        ],
-        [
-            'login' => 'borzenko_ys',
-            'password' => md5('borzenko_ys'),
-        ],
-        [
-            'login' => 'chuprova_sm',
-            'password' => md5('chuprova_sm'),
-        ],
-        [
-            'login' => 'putin_vv',
-            'password' => md5('putin_vv'),
-        ],
-        [
-            'login' => 'demin_dv',
-            'password' => md5('demin_dv'),
-        ],
-        [
-            'login' => 'yakovlev_ak',
-            'password' => md5('yakovlev_ak'),
-        ],        
-    ];
-
-    $activerUser = null;
+    $users = [];         // пользователи - пароль
+    $activerUser = null; // активный пользователь
 
     // Список всех пользователей и хэшей их паролей
     function getUsersList(){
         global $users;
-        foreach($users as $user){ 
-            $login = $user['login'];
-            $password = $user['password'];
-            echo "login = $login, password = $password<br>";
+        $usersDB = file('resources/users.data') ?? null;
+        if($usersDB != null){
+            foreach ($usersDB as $userDB){
+                $line = explode(':', $userDB);
+                $users[trim($line[0])] = trim($line[1]); 
+            }
         }
     }
-
-    // поиск объекта в массиве объектов
-    function findObjectInArray($arr, $prop, $propValue){
-        $search = array_filter($arr, fn($elem) => $elem[$prop]===$propValue);
-        return count($search) != 0;
-    }
+    getUsersList();
 
     // проверяет существование пользователя
     function existsUser($login){
         global $users;
-        return findObjectInArray($users, 'login', $login);
+        return array_key_exists($login, $users);
     }
     
     // аутентификация
     function checkPassword($login, $password){
         global $users;
-        return findObjectInArray($users, 'password', md5($password));
+        $hash = md5($password);
+        if(existsUser($login))
+            return $users[$login] === $hash;
+        else
+            return false; 
     }
 
     // получить активного пользователя

@@ -12,6 +12,7 @@
         <h3 class='loginSection__header'> Авторизация</h3>
 
         <?php
+            // вывод сообщения о неправильном логине или пароле
             $nouser = $_SESSION['nouser'] ?? null;
             $wrongPassword = $_SESSION['wrongpassword'] ?? null;
             if($nouser){
@@ -21,7 +22,7 @@
             elseif($wrongPassword){
                 echo "<div class='error'>неверный пароль</div>";
                 session_unset();
-            }           
+            }          
         ?>
 
         <div class='form-row'>
@@ -36,6 +37,7 @@
             <input class='btn-submit' type="submit" disabled value='Войти' name='log_in'>
         </div>
     </form></section>
+
     <script src="js/login.js"></script>
 </body>
 </html>

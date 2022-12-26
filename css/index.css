@@ -1,0 +1,14 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.user{
+    text-align: center;
+    width: 98%;
+    margin: auto;
+    margin-top: 0.2rem;
+    padding: 1rem;
+    background-color: green;
+    color: white;
+}
