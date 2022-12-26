@@ -3,6 +3,10 @@
 
 <?php
     session_start();
+    
+    $count = $_SESSION['count'] ?? 0;
+    $_SESSION['count'] = ++$count;
+
     // аутентификация
     $auth = $_SESSION['auth'] ?? null;
     if (!$auth) header('Location: pages/login.php');
