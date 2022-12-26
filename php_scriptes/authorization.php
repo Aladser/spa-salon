@@ -1,8 +1,8 @@
 <?php
-
     include 'db.php';
     session_start();
 
+    // логин пароль одинаковые
     $login = $_POST['login'] ?? null;
     $password = $_POST['password'] ?? null;
 
@@ -11,16 +11,22 @@
         if(checkPassword($login, $password)){
             $_SESSION['auth'] = true;
             $_SESSION['login'] = $login;
-            header('Location: index.php');
+            $time = explode(':', date('G:i'));
+            $_SESSION['startHours'] = $time[0];
+            $_SESSION['startMinutes'] =  $time[1];
+
+            header('Location: ../index.php');
         }     
         else{
             $_SESSION['wrongpassword'] = true;
-            header('Location: login.php');
+            $_SESSION['login'] = $login;
+
+            header('Location: ../pages/login.php');
         }
     } 
     else{
         $_SESSION['nouser'] = true;
-        header('Location: login.php');
+        
+        header('Location: ../pages/login.php');
     }
-    exit;
 ?>

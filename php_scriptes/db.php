@@ -1,11 +1,10 @@
 <?php
-    $users = [];         // пользователи - пароль
-    $activerUser = null; // активный пользователь
+    $users = []; // словарь 'логин - пароль'
 
-    // Список всех пользователей и хэшей их паролей
+    // сформировать массив пользователей и их паролей из файла
     function getUsersList(){
         global $users;
-        $usersDB = file('resources/users.data') ?? null;
+        $usersDB = file('../resources/users.data') ?? null;
         if($usersDB != null){
             foreach ($usersDB as $userDB){
                 $line = explode(':', $userDB);
@@ -29,11 +28,5 @@
             return $users[$login] === $hash;
         else
             return false; 
-    }
-
-    // получить активного пользователя
-    function getCurrentUser(){
-        return $activerUser;
-    }
-    
+    } 
 ?>

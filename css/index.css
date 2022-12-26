@@ -3,12 +3,44 @@
     padding: 0px;
 }
 
+.footer{
+    display: flex;
+    margin: 0.25rem;
+}
+
 .user{
+    width: 20%;
     text-align: center;
-    width: 98%;
-    margin: auto;
-    margin-top: 0.2rem;
-    padding: 1rem;
-    background-color: green;
+    background-color: blueviolet;
     color: white;
+    padding: 1rem;
+}
+
+.discount{
+    width: 80%;
+    padding: 1rem;
+    background-color: rgb(118, 4, 224);
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+.discount:hover{
+    background-color: blueviolet;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+}
+
+.btn-exit{
+    height: 100%;
+    text-align: center;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    padding: 1rem;
+}
+.btn-exit:hover{
+    background-color: rgb(118, 4, 224);
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    cursor: pointer;
 }
