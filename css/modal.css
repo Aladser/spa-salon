@@ -74,9 +74,18 @@
     height: 1.5rem;
     padding: 0.2rem 0.5rem;
   }
+  
   .modal__send-btn{
     background: none;
     border: 1px solid grey;
     height: 2.2rem;
     padding: 0rem 0.5rem;
+  }
+  .modal__send-btn:hover{
+    background-color: rgb(223, 223, 223);
+    color: white;
+    border: 1px solid white;
+  }
+  .modal__send-btn:active{
+    cursor: pointer;
   }
