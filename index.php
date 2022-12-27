@@ -3,13 +3,11 @@
 
 <?php
     session_start();
+    // счетчик посещений
+    $_SESSION['count'] = $_SESSION['count'] ?? 0;
+    $_SESSION['count']++;
     
-    $count = $_SESSION['count'] ?? 0;
-    $_SESSION['count'] = ++$count;
-
-    // аутентификация
     $auth = $_SESSION['auth'] ?? null;
-    if (!$auth) header('Location: pages/login.php');
 ?>
 
 <head>
@@ -26,19 +24,27 @@
         <!--  отображение имени пользователя 
             не используется getCurrentUser(), чтобы не подключать db.php
         -->
-        <p class='user'><?php 
-        if($auth){
-            $login = $_SESSION['login'];
-            $startHours = $_SESSION['startHours'];
-            $startMinutes = $_SESSION['startMinutes'];
-
-            echo "$login (с $startHours:$startMinutes GMT+3)";
-        } 
+        
+        <p class='user'><?php
+            if($auth){
+                $login = $_SESSION['login'];
+                $startHours = $_SESSION['startHours'];
+                $startMinutes = $_SESSION['startMinutes']; 
+                echo "$login (Время входа: $startHours:$startMinutes GMT+3)";
+            }
+            else{
+                echo $_SESSION['count']==1 ?  "Здравствуйте, Гость!" : "Хотите войти в личный кабинет?";       
+            } 
         ?></p>
         <!-- Выход из личного кабинета -->
-        <form class='form-exit' method="POST" action='../php_scriptes/exit.php'>
-            <input class='btn-exit' type="submit" value='Выйти'>
-        </form>
+        <?php
+            if($auth){
+                echo "<form class='form-exit' method='POST' action='../php_scriptes/exit.php'><input type='submit' class='btn-auth' value='Выйти'> </form>";
+            }
+            else{
+                echo "<a class='btn-auth' href='../pages/login.php'>Войти</a>";
+            }
+        ?>
         <!-- Отображение скидки -->
         <p class='discount'><?php
             if($auth){

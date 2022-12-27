@@ -7,9 +7,8 @@
     
     // создание новой сессии
     session_start();
-    $_SESSION['exit'] = true;
     $_SESSION['login'] = $login;
-    $_SESSION['count'] = 1;
+    $_SESSION['count'] = 0;
     
-    header('Location: ../pages/login.php');
+    header('Location: ../index.php');
 ?>

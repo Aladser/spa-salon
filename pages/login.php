@@ -28,11 +28,10 @@
             <label for="login-input" class='form-row__label'>Логин:</label>
             <!-- показ логина, если неправильный пароль или выход из личного кабинета-->
             <?php
-                $isExit = $_SESSION['exit'] ?? null;
                 $login = $_SESSION['login'] ?? null;
 
                 echo "<input type='text' class='login-input' name='login' id='login-input' autocomplete='off'";
-                echo $isExit || $wrongPassword ? " value=$login>" : ">";
+                echo $wrongPassword ? " value=$login>" : ">";
                 if($wrongPassword) unset($_SESSION['wrongpassword']);
             ?>
         </div>
