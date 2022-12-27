@@ -60,8 +60,8 @@
                 echo "</p></section>";
             }
         ?>
-        <!-- Ввод даты рождения -->
-        <?php if($auth && $_SESSION['count']>1){ ?>
+        <!-- Ввод даты рождения при втором посещении сайта-->
+        <?php if($auth && $_SESSION['count']==2){ ?>
             <section class="modal modal_active">
                 <div class="modal__content">
                     <button class="modal__close-button">x</button>
@@ -72,7 +72,7 @@
                     </form>
                 </div>
             </section>
-        <?php } ?>
+        <?php }?>
 
     </main>
     <script src="js/modal.js"></script>
