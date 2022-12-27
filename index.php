@@ -24,12 +24,10 @@
     <footer class='footer'>
         <!-- Вход/выход в личный кабинет -->
         <?php
-            if($auth){
+            if($auth)
                 echo "<form class='form-auth' method='POST' action='../php_scriptes/exit.php'><input type='submit' class='btn-auth btn-exit' value='Выйти'> </form>";
-            }
-            else{
+            else
                 echo "<a class='btn-auth' href='../pages/login.php'>Войти</a>";
-            }
         ?>
         <!--  отображение имени пользователя 
             не используется getCurrentUser(), чтобы не подключать db.php
@@ -62,22 +60,19 @@
                 echo "</p></section>";
             }
         ?>
-    </main>
+        <!-- Ввод даты рождения -->
+        <?php if($auth && $_SESSION['count']>1){ ?>
+            <section class="modal modal_active">
+                <div class="modal__content">
+                    <button class="modal__close-button">x</button>
+                    <h1 class="modal__title">Введите вашу дату рождения</h1>
+                    <input type="date" class='modal__birthday'>
+                    <input type="submit" class='modal__send-btn' value="Отправить">
+                </div>
+            </section>
+        <?php } ?>
 
-    <div id="openModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Название</h3>
-                <a href="#close" title="Close" class="close">×</a>
-            </div>
-            <div class="modal-body">    
-                <p>Содержимое модального окна...</p>
-            </div>
-            </div>
-        </div>
-    </div>
-    <a href="#openModal">Открыть модальное окно</a>
-    
+    </main>
+    <script src="js/modal.js"></script>
 </body>
 </html>
