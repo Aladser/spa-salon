@@ -14,6 +14,7 @@
             $time = explode(':', date('G:i'));
             $_SESSION['startHours'] = $time[0];
             $_SESSION['startMinutes'] =  $time[1];
+            $_SESSION['count'] = 0;
 
             header('Location: ../index.php');
         }     

@@ -14,7 +14,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/modal.css">
     <title> СПА-салон </title>
 </head>
 
@@ -48,6 +49,7 @@
     </footer>
 
     <main>
+        <!-- индивидуальная скидка -->
         <?php
             if($auth){
                 $time = explode(':', date('G:i'));
@@ -61,6 +63,21 @@
             }
         ?>
     </main>
+
+    <div id="openModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Название</h3>
+                <a href="#close" title="Close" class="close">×</a>
+            </div>
+            <div class="modal-body">    
+                <p>Содержимое модального окна...</p>
+            </div>
+            </div>
+        </div>
+    </div>
+    <a href="#openModal">Открыть модальное окно</a>
     
 </body>
 </html>
