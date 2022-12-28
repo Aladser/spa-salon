@@ -60,26 +60,8 @@
         ?>
     </main>
 
-    <!-- модальное окно ввода даты рождения -->
-    <section id='bithdayInputSection' class='modal'>
-        <div class="modal__content">
-            <button class="modal__close-button">x</button>
-            <h1 class="modal__title">Введите вашу дату рождения</h1>
-            <div class='modal__body'>
-                <input type="date" class='modal__birthday'>
-                <input type="button" class='modal__btn' id='send-btn' disabled value="Отправить">
-            </div>
-        </div>
-    </section>
-    <!-- модальное окно поздравления с днем рождения -->
-    <section id='congratSection' class='modal'>;
-        <div class="modal__content">
-            <h1 class="modal__title"> О, у вас сегодня день рождения </h1>
-            <p class='modal__message'> Поздравлем! Сегодня дарим вам скидку 5% на все товары и услуги </p>
-            <input type="button" class='modal__btn' id='close-congrat-btn' value="ОК">
-        </div>
-    </section>
-
-    <script src="js/modalBirthday.js"></script>
+    <?php include 'pages/birthdayInputWindow.php' ?> <!-- модальное окно ввода даты рождения -->
+    <?php include 'pages/congratulations.php' ?> <!-- модальное окно поздравления с днем рождения -->
+    <script src="../js/modalBirthday.js"></script>
 </body>
 </html>
