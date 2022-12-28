@@ -20,7 +20,6 @@
 </head>
 
 <body>
-
     <footer class='footer'>
         <!-- Вход/выход в личный кабинет -->
         <?php
@@ -59,22 +58,28 @@
                 echo "</p></section>";
             }
         ?>
-        <!-- Ввод даты рождения при втором посещении сайта-->
-        <?php 
-            echo "<section class='modal";
-            echo $auth && $_SESSION['count']==2 ? " modal_active'>" : "'>";   
-        ?>
-            <div class="modal__content">
-                <button class="modal__close-button">x</button>
-                <h1 class="modal__title">Введите вашу дату рождения</h1>
-                <form method="POST" class='birthday-form' action='php_scriptes/birthday.php'>
-                    <input type="date" class='modal__birthday' name='birthday'>
-                    <input type="submit" class='modal__send-btn' disabled value="Отправить">
-                </form>
-            </div>
-        </section>
-
     </main>
-    <script src="js/modal.js"></script>
+
+    <!-- модальное окно ввода даты рождения -->
+    <section id='bithdayInputSection' class='modal'>
+        <div class="modal__content">
+            <button class="modal__close-button">x</button>
+            <h1 class="modal__title">Введите вашу дату рождения</h1>
+            <div class='modal__body'>
+                <input type="date" class='modal__birthday'>
+                <input type="button" class='modal__btn' id='send-btn' disabled value="Отправить">
+            </div>
+        </div>
+    </section>
+    <!-- модальное окно поздравления с днем рождения -->
+    <section id='congratSection' class='modal'>;
+        <div class="modal__content">
+            <h1 class="modal__title"> О, у вас сегодня день рождения </h1>
+            <p class='modal__message'> Поздравлем! Сегодня дарим вам скидку 5% на все товары и услуги </p>
+            <input type="button" class='modal__btn' id='close-congrat-btn' value="ОК">
+        </div>
+    </section>
+
+    <script src="js/modalBirthday.js"></script>
 </body>
 </html>

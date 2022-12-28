@@ -65,7 +65,7 @@
     margin: 0 0 15px;
   }
 
-  .birthday-form{
+  .modal__body{
     width: 100%;
     text-align: center;
   }
@@ -74,18 +74,26 @@
     height: 1.5rem;
     padding: 0.2rem 0.5rem;
   }
-  
-  .modal__send-btn{
+
+  /* кнопка модального окна */
+  .modal__btn{
     background: none;
     border: 1px solid grey;
     height: 2.2rem;
-    padding: 0rem 0.5rem;
+    width: 6rem;
   }
-  .modal__send-btn:hover{
+  /* кнопка модального окна: наведение на активную кнопку */
+  .modal__btn:hover:not(:disabled){
     background-color: rgb(223, 223, 223);
     color: white;
     border: 1px solid white;
-  }
-  .modal__send-btn:active{
     cursor: pointer;
+  }
+   /* кнопка модального окна: нажатие на активную кнопку */
+  .modal__btn:active:not(:disabled){
+    cursor: default;
+  }
+
+  .modal__message{
+    margin-bottom: 1rem;
   }
