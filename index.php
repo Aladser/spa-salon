@@ -2,12 +2,13 @@
 <html lang="en">
 
 <?php
-    session_start();
-    // счетчик посещений
-    $_SESSION['count'] = $_SESSION['count'] ?? 0;
-    $_SESSION['count']++;
-    
+    session_start(); 
     $auth = $_SESSION['auth'] ?? null;
+    if($auth){
+        $login = $_SESSION['login'];
+        $_SESSION[$login]++;
+        echo 'посещений: '.$_SESSION[$login];
+    }
 ?>
 
 <head>
@@ -36,9 +37,7 @@
                 $startMinutes = $_SESSION['startMinutes']; 
                 echo "$login (Время входа: $startHours:$startMinutes GMT+3)";
             }
-            else{
-                echo $_SESSION['count']==1 ?  "Здравствуйте, Гость!" : "Хотите войти в личный кабинет?";       
-            } 
+            else echo "Здравствуйте, Гость!";       
         ?></p>
         
         <p class='name-company-footer'> СПА-салон <span class='name-company-footer__name'>На чиле</span></p>
