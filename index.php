@@ -68,8 +68,8 @@
                 <button class="modal__close-button">x</button>
                 <h1 class="modal__title">Введите вашу дату рождения</h1>
                 <form method="POST" class='birthday-form' action='php_scriptes/birthday.php'>
-                    <input type="date" class='modal__birthday'>
-                    <input type="submit" class='modal__send-btn' value="Отправить">
+                    <input type="date" class='modal__birthday' name='birthday'>
+                    <input type="submit" class='modal__send-btn' disabled value="Отправить">
                 </form>
             </div>
         </section>
