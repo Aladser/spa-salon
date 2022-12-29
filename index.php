@@ -22,14 +22,16 @@
 
 <body>
     <footer class='footer'>
-        <!-- Вход/выход в личный кабинет -->
-        <?php if($auth){ ?>
-                <form class='form-auth' method='POST' action='../php_scriptes/exit.php'>
-                    <input type='submit' class='btn-auth btn-exit' value='Выйти'> 
-                </form>
-        <?php    }else{ ?>
-                <a class='btn-auth' href='../pages/login.php'>Войти</a>
-        <?php } ?>
+        <!-- показ кнопки Вход/выход в личный кабинет -->
+        <?php 
+            if($auth){
+                echo "<form class='form-auth' method='POST' action='../php_scriptes/exit.php'>";
+                echo "<input type='submit' class='btn-auth btn-exit' value='Выйти'>"; 
+                echo "</form>";
+           }else{
+                echo "<a class='btn-auth' href='../pages/login.php'>Войти</a>";
+        } 
+        ?>
         <!-- отображение имени пользователя. Не используется getCurrentUser(), так как хранится активный пользователь в сессии -->        
         <p class='user-footer'><?php
             if($auth){
@@ -50,8 +52,8 @@
     <main>
 
         <?php
-            // вычисляет остаток времени в часах, минутах и секундах
-            function getLetTime($time){
+            // переводит интервал времени в секундах в часы-минуты-секунды
+            function getFormatTime($time){
                 $interval['hours'] = floor($time/3600);
                 $interval['minutes'] = floor($time%3600/60);
                 $interval['seconds'] = floor($time%60);
@@ -66,7 +68,7 @@
                 }
                 // показ индивидуальной скидки, если прошло меньше суток, при последующих посещениях и обновлениях
                 elseif(time()<$_SESSION['endDiscountTime']){
-                    $leftTime = getLetTime($_SESSION['endDiscountTime']-time());
+                    $leftTime = getFormatTime($_SESSION['endDiscountTime']-time());
 
                     echo "<section class='container'><p class='discount-container'>";
                     echo "Для вас индивидуальное предложение! Спешите!  Осталось ";
@@ -76,7 +78,8 @@
                     echo "</p></section>";
                 } 
 
-                // ****  предложение ввода даты рождения при следующих входах в личный кабинет во время текущей сессии *****
+                // ****  предложение ввода даты рождения при втором входе в личный кабинет во время текущей сессии *****
+                $_SESSION[$login.'IsExit'] = $_SESSION[$login.'IsExit'] ?? 0;
                 // отправка формы ввода даты
                 if (isset($_POST['birthday'])){
                     --$_SESSION[$login];
@@ -88,11 +91,11 @@
                     header('Location: index.php');              
                 }
                 // показ диалогового окна ввода даты
-                elseif( isset($_SESSION[$login.'IsExit']) && !isset($_SESSION[$login.'birthDay'])){
-                    $_SESSION[$login.'IsExit'] = null;
+                elseif( $_SESSION[$login.'IsExit']==1 && !isset($_SESSION[$login.'birthDay'])){
+                    $_SESSION[$login.'IsExit']++;
                     include 'pages/birthdayInputWindow.php';
                 }
-                // подсчет числа дней до дня рождения
+
             }
         ?>
     </main>
