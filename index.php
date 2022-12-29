@@ -7,8 +7,8 @@
     if($auth){
         $login = $_SESSION['login']; // активный пользователь
         $_SESSION[$login]++; // число посещений активным пользователем
-        echo $_SESSION[$login];
     }
+    var_dump($_SESSION);
 ?>
 
 <head>
@@ -41,7 +41,8 @@
         ?></p>
         
         <?php 
-            //if($auth && isset($_SESSION['birthDay'])) echo "<p class='before-birthday-prg'> До вашего дня рождения осталось 10 дней</p>"
+            // вывод числа дней до дня рождения
+            if($auth && isset($_SESSION[$login.'birthDay'])) echo "<p class='before-birthday-prg'> До вашего дня рождения осталось 10 дней</p>"
         ?>
         <p class='name-company-prg'> СПА-салон <span class='name-company-prg__name'>На чиле</span></p>
     </footer>
@@ -75,21 +76,23 @@
                     echo "</p></section>";
                 } 
 
-                // предложение ввести дату рождения при следующих входах в личный кабинет во время текущей сессии
-                if($_SESSION[$login]==3) 
-                    include 'pages/birthdayInputWindow.php';
-                elseif (isset($_POST['birthday'])){
+                // ****  предложение ввода даты рождения при следующих входах в личный кабинет во время текущей сессии *****
+                // отправка формы ввода даты
+                if (isset($_POST['birthday'])){
                     --$_SESSION[$login];
 
                     $birthDate = explode('-', $_POST['birthday']);
-                    $_SESSION['birthDay'] = $birthDate[2];
-                    $_SESSION['birthMonth'] = $birthDate[1];
+                    $_SESSION[$login.'birthDay'] = $birthDate[2];
+                    $_SESSION[$login.'birthMonth'] = $birthDate[1];
 
                     header('Location: index.php');              
                 }
-                else{
-
+                // показ диалогового окна ввода даты
+                elseif( isset($_SESSION[$login.'IsExit']) && !isset($_SESSION[$login.'birthDay'])){
+                    $_SESSION[$login.'IsExit'] = null;
+                    include 'pages/birthdayInputWindow.php';
                 }
+                // подсчет числа дней до дня рождения
             }
         ?>
     </main>
