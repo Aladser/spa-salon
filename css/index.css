@@ -45,11 +45,18 @@ a{text-decoration: none;}
     align-items: center;
 }
 
-.name-company-footer{
-    width: 80%;
-    padding: 0.8rem 0rem;
+.name-company-prg{
+    width: 60%;
+    padding: 0.8rem 4rem;
     border-right: 1px solid white;
     font-size: 1.8rem;
+    text-align: right;
+}
+.before-birthday-prg{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn-auth:hover{
@@ -58,7 +65,7 @@ a{text-decoration: none;}
     border: 1px solid blueviolet;
     cursor: pointer;
 }
-.name-company-footer__name{
+.name-company-prg__name{
     font-weight: bolder;
     font-size: 2rem;
 }
@@ -67,17 +74,17 @@ a{text-decoration: none;}
     padding: 1rem;
     text-align: center;
     cursor: pointer;
-    border: 1px dotted grey;
-    width: 97.6%;
+    border: 1px dotted blueviolet;
+    width: 60%;
     margin: 0.8rem auto;
 
     font-family:Arial, Helvetica, sans-serif;
     font-size: 1.8rem;
     font-weight: bolder;
-    color: rgb(51, 51, 51);
+    color: blueviolet;
 }
 .discount-container:hover{
-    background-color: orange;
+    background-color: rgb(196, 48, 255);
     color: white;
     border-color: white;
 } 

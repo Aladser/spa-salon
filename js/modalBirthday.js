@@ -26,4 +26,7 @@ sendBtn.addEventListener('click', ()=>{
     }
 });
 
-document.querySelector('#close-congrat-btn').addEventListener('click', () => congratWindow.className = 'modal'); // закрытие поздравления
+// закрытие поздравления
+document.querySelector('#close-congrat-btn').addEventListener('click', () => {
+    congratWindow.className = 'modal';
+});

@@ -2,7 +2,7 @@
     include 'db.php';
     session_start();
 
-    // логин пароль одинаковые
+    // логин пароль одинаковые для простоты
     $login = $_POST['login'] ?? null;
     $password = $_POST['password'] ?? null;
 
@@ -12,9 +12,7 @@
             $_SESSION['auth'] = true; // флаг аутентицикации
             $_SESSION['login'] = $login; // текущий пользователь
             $_SESSION[$login] = $_SESSION[$login] ?? 0; // число посещений сайта(index.php) текущего пользователя
-            $time = explode(':', date('G:i'));
-            $_SESSION['startHours'] = $time[0]; // часы входа
-            $_SESSION['startMinutes'] =  $time[1]; // минуты входа
+            $_SESSION['authTime'] = time(); // время авторизации
 
             header('Location: ../index.php');
         }     

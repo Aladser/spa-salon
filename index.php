@@ -5,9 +5,9 @@
     session_start(); 
     $auth = $_SESSION['auth'] ?? null;
     if($auth){
-        $login = $_SESSION['login'];
-        $_SESSION[$login]++;
-        echo 'посещений: '.$_SESSION[$login];
+        $login = $_SESSION['login']; // активный пользователь
+        $_SESSION[$login]++; // число посещений активным пользователем
+        echo $_SESSION[$login];
     }
 ?>
 
@@ -23,44 +23,77 @@
 <body>
     <footer class='footer'>
         <!-- Вход/выход в личный кабинет -->
-        <?php
-            if($auth)
-                echo "<form class='form-auth' method='POST' action='../php_scriptes/exit.php'><input type='submit' class='btn-auth btn-exit' value='Выйти'> </form>";
-            else
-                echo "<a class='btn-auth' href='../pages/login.php'>Войти</a>";
-        ?>
-        <!-- отображение имени пользователя. Не используется getCurrentUser(), чтобы не подключать db.php -->        
+        <?php if($auth){ ?>
+                <form class='form-auth' method='POST' action='../php_scriptes/exit.php'>
+                    <input type='submit' class='btn-auth btn-exit' value='Выйти'> 
+                </form>
+        <?php    }else{ ?>
+                <a class='btn-auth' href='../pages/login.php'>Войти</a>
+        <?php } ?>
+        <!-- отображение имени пользователя. Не используется getCurrentUser(), так как хранится активный пользователь в сессии -->        
         <p class='user-footer'><?php
             if($auth){
                 $login = $_SESSION['login'];
-                $startHours = $_SESSION['startHours'];
-                $startMinutes = $_SESSION['startMinutes']; 
-                echo "$login (Время входа: $startHours:$startMinutes GMT+3)";
+                $authDate = date('H:i', $_SESSION['authTime']);
+                echo "$login (Время входа: $authDate GMT+3)";
             }
             else echo "Здравствуйте, Гость!";       
         ?></p>
         
-        <p class='name-company-footer'> СПА-салон <span class='name-company-footer__name'>На чиле</span></p>
+        <?php 
+            //if($auth && isset($_SESSION['birthDay'])) echo "<p class='before-birthday-prg'> До вашего дня рождения осталось 10 дней</p>"
+        ?>
+        <p class='name-company-prg'> СПА-салон <span class='name-company-prg__name'>На чиле</span></p>
     </footer>
 
     <main>
-        <!-- индивидуальная скидка -->
-        <?php
-            if($auth){
-                $time = explode(':', date('G:i'));
-                $nowHours = 23 - $time[0];
-                $nowMinutes = 60 - $time[1];
 
-                echo "<section class='container'><p class='discount-container'>";
-                echo "Для вас индивидуальное предложение! Спешите!  Осталось ";
-                echo $nowHours != 0 ? "$nowHours ч. $nowMinutes мин." : "$nowMinutes мин.";
-                echo "</p></section>";
+        <?php
+            // вычисляет остаток времени в часах, минутах и секундах
+            function getLetTime($time){
+                $interval['hours'] = floor($time/3600);
+                $interval['minutes'] = floor($time%3600/60);
+                $interval['seconds'] = floor($time%60);
+                return $interval;
+            }
+
+            if($auth){ 
+                // ***** индивидуальная скидка *****
+                // при первом входе в личный кабинет в текущей сессии активируется индивидуальная скидка 
+                if($_SESSION[$login] == 1){
+                    $_SESSION['endDiscountTime'] = time() + 86400; // время конца скидки
+                }
+                // показ индивидуальной скидки, если прошло меньше суток, при последующих посещениях и обновлениях
+                elseif(time()<$_SESSION['endDiscountTime']){
+                    $leftTime = getLetTime($_SESSION['endDiscountTime']-time());
+
+                    echo "<section class='container'><p class='discount-container'>";
+                    echo "Для вас индивидуальное предложение! Спешите!  Осталось ";
+                    echo $leftTime['hours'].'ч. ';
+                    echo $leftTime['minutes'].'мин. ';
+                    echo $leftTime['seconds'].'с.';
+                    echo "</p></section>";
+                } 
+
+                // предложение ввести дату рождения при следующих входах в личный кабинет во время текущей сессии
+                if($_SESSION[$login]==3) 
+                    include 'pages/birthdayInputWindow.php';
+                elseif (isset($_POST['birthday'])){
+                    --$_SESSION[$login];
+
+                    $birthDate = explode('-', $_POST['birthday']);
+                    $_SESSION['birthDay'] = $birthDate[2];
+                    $_SESSION['birthMonth'] = $birthDate[1];
+
+                    header('Location: index.php');              
+                }
+                else{
+
+                }
             }
         ?>
     </main>
 
-    <?php include 'pages/birthdayInputWindow.php' ?> <!-- модальное окно ввода даты рождения -->
-    <?php include 'pages/congratulations.php' ?> <!-- модальное окно поздравления с днем рождения -->
     <script src="../js/modalBirthday.js"></script>
 </body>
 </html>
