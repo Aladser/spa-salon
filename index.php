@@ -2,13 +2,27 @@
 <html lang="en">
 
 <?php
+    // получить текущее время
+    function getDateNowInSeconds(){
+        $time = time();
+        return mktime(0,0,0,date('m', $time),date('d', $time),date('Y', $time));
+    }
+    // переводит интервал времени в секундах в часы-минуты-секунды
+    function getFormatTimeInterval($time){
+        $interval['days'] = intval(floor($time/86400));
+        $interval['hours'] = intval(floor($time%86400/3600));
+        $interval['minutes'] = intval(floor($time%86400%3600/60));
+        $interval['seconds'] = intval(floor($time%86400%3600%60));
+        return $interval;
+    }
+
     session_start(); 
     $auth = $_SESSION['auth'] ?? null;
     if($auth){
         $login = $_SESSION['login']; // активный пользователь
         $_SESSION[$login]++; // число посещений активным пользователем
     }
-    var_dump($_SESSION);
+    //foreach($_SESSION as $key => $value) echo "$key => $value<br>";
 ?>
 
 <head>
@@ -43,55 +57,69 @@
         ?></p>
         
         <?php 
+            // отлов формы ввода даты ДР
+            if (isset($_POST['birthday'])){
+                --$_SESSION[$login];
+                
+                // формирование даты ДР для подсчета числа дней до него
+                $birthDate = explode('-', $_POST['birthday']);
+                $birthDay = $birthDate[2];
+                $birthMonth = $birthDate[1];
+                if($birthMonth>date('m')) $birthYear = date('Y');
+                elseif($birthMonth===date('m') && $birthDay>=date('d')) $birthYear = date('Y');
+                else $birthYear = date('Y')+1;
+
+                $_SESSION[$login.'Birthday'] = mktime(0,0,0, $birthMonth, $birthDay, $birthYear); // запись ДР в сессию в секундах от 1970г.
+                $_SESSION[$login]--; // редирект отправки формы не учитывается
+                header('Location: index.php');              
+            }
+            if($auth) 
+                $isBirthday = isset($_SESSION[$login.'Birthday']) ? ($_SESSION[$login.'Birthday'] - getDateNowInSeconds()) == 0 : null;
+
             // вывод числа дней до дня рождения
-            if($auth && isset($_SESSION[$login.'birthDay'])) echo "<p class='before-birthday-prg'> До вашего дня рождения осталось 10 дней</p>"
+            if($auth && isset($_SESSION[$login.'Birthday']) && ($_SESSION[$login.'IsExit']>1 || $isBirthday))
+            {
+                $interval = $_SESSION[$login.'Birthday'] - getDateNowInSeconds();
+                if($interval!=0)
+                    $text = 'До вашего дня рождения осталось '.getFormatTimeInterval($interval)['days'].' дней'; 
+                else 
+                    $text = 'О, сегодня ваш день рождения. Поздравляем! Сегодня дарим вас скидку 5% на все наши услуги';
+                echo "<p class='before-birthday-prg'>$text</p>";
+            }
         ?>
-        <p class='name-company-prg'> СПА-салон <span class='name-company-prg__name'>На чиле</span></p>
+        <p class='name-company-prg'> СПА-салон <span class='name-company-prg__name'>НА ЧИЛЕ</span></p>
     </footer>
 
     <main>
-
         <?php
-            // переводит интервал времени в секундах в часы-минуты-секунды
-            function getFormatTime($time){
-                $interval['hours'] = floor($time/3600);
-                $interval['minutes'] = floor($time%3600/60);
-                $interval['seconds'] = floor($time%60);
-                return $interval;
-            }
-
             if($auth){ 
                 // ***** индивидуальная скидка *****
-                // при первом входе в личный кабинет в текущей сессии активируется индивидуальная скидка 
+                // при первом входе текущей сессии в личный кабинет активируется индивидуальная скидка 
                 if($_SESSION[$login] == 1){
                     $_SESSION['endDiscountTime'] = time() + 86400; // время конца скидки
                 }
                 // показ индивидуальной скидки, если прошло меньше суток, при последующих посещениях и обновлениях
-                elseif(time()<$_SESSION['endDiscountTime']){
-                    $leftTime = getFormatTime($_SESSION['endDiscountTime']-time());
+                else{
+                    $pagesUpdates =  $_SESSION[$login]; // число обновлений страницы
+                    $isDiscount = time()<$_SESSION['endDiscountTime']; // активность скидки на 24 часа
+                    $isWritenBirthday = isset($_SESSION['borzenko_ysBirthday']); // записана ли дата рождения
 
-                    echo "<section class='container'><p class='discount-container'>";
-                    echo "Для вас индивидуальное предложение! Спешите!  Осталось ";
-                    echo $leftTime['hours'].'ч. ';
-                    echo $leftTime['minutes'].'мин. ';
-                    echo $leftTime['seconds'].'с.';
-                    echo "</p></section>";
-                } 
-
-                // ****  предложение ввода даты рождения при втором входе в личный кабинет во время текущей сессии *****
-                $_SESSION[$login.'IsExit'] = $_SESSION[$login.'IsExit'] ?? 0;
-                // отправка формы ввода даты
-                if (isset($_POST['birthday'])){
-                    --$_SESSION[$login];
-
-                    $birthDate = explode('-', $_POST['birthday']);
-                    $_SESSION[$login.'birthDay'] = $birthDate[2];
-                    $_SESSION[$login.'birthMonth'] = $birthDate[1];
-
-                    header('Location: index.php');              
+                    if( ($pagesUpdates>0 && $isDiscount && !$isWritenBirthday) || ($pagesUpdates>1 && $isDiscount && $isWritenBirthday)){
+                        $leftTime = getFormatTimeInterval($_SESSION['endDiscountTime']-time());
+    
+                        echo "<section class='container'><p class='discount-container'>";
+                        echo "Для вас индивидуальное предложение! Спешите!  Осталось ";
+                        echo $leftTime['hours'].'ч. ';
+                        echo $leftTime['minutes'].'мин. ';
+                        echo $leftTime['seconds'].'с.';
+                        echo "</p></section>";
+                    }    
                 }
+                
+                // ****  скидка в честь дня рождения *****
+                $_SESSION[$login.'IsExit'] = $_SESSION[$login.'IsExit'] ?? 0;
                 // показ диалогового окна ввода даты
-                elseif( $_SESSION[$login.'IsExit']==1 && !isset($_SESSION[$login.'birthDay'])){
+                if( $_SESSION[$login.'IsExit']==0 && !isset($_SESSION[$login.'birthDay'])){
                     $_SESSION[$login.'IsExit']++;
                     include 'pages/birthdayInputWindow.php';
                 }
