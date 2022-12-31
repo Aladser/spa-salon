@@ -75,7 +75,7 @@
             <p class='visit-card__company-name'> На Чиле </p>
             <p class='visit-card__address'>Спа-Салон (г.Благовещенск, ул.Пролетарская, д.5)</p>
             <p class='visit-card__schedule'>Круглосуточно</p>
-            <input type="button" class='btn btn-call' value="Позвоните нам">
+            <input type="button" class='btn btn-call' value="Позвонить">
         </section>  
         <p class='discount discount-uniq'></p>
 
@@ -236,6 +236,7 @@
             <p>Номер медицинской лицензии ЛО-76-01-002267 от 25.02.2020 г.</p>
             <p>СПА Салон ООО "На чиле"</p>
     </footer>
+
     <script type='text/javascript' src='js/modalBirthday.js'></script>
     <script type='text/javascript' src='js/index.js'></script>
 </body>
