@@ -2,14 +2,14 @@
 <html lang="en">
 
 <?php
-    include 'php_scriptes/dateFunc.php';
+    include 'php_scriptes/dateFunc.php'; // функции для работы с датами
 
     session_start(); 
     $auth = $_SESSION['auth'] ?? null;
     // авторизация
     if($auth){
         $login = $_SESSION['login']; // активный пользователь
-        $_SESSION[$login]['visits']++;
+        $_SESSION[$login]['visits']++; // число обновлений страниц активным пользователем
         $birthday =  $_SESSION[$login]['birthday'] ?? false; // ДР
         $isBirthday = $birthday ? ($birthday - getDateNowInSeconds()) == 0 : false; // флаг, что ДР сегодня
         $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0; // число выходов
@@ -21,7 +21,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/icon.png">
+    <link rel="icon" href="img/icon.png">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/modal.css">
     <title> СПА-салон «На Чиле»</title>
@@ -37,17 +37,20 @@
                 echo "</form>";
            }else{
                 echo "<a class='header__btn header__btn-login' href='../pages/login.php'>Войти</a>";
-        } 
+            } 
         ?>
+
         <!-- отображение имени пользователя. Не используется getCurrentUser(), так как хранится активный пользователь в сессии -->        
-        <p class='header__user'><?php
+        <p class='header__user'>
+        <?php
             if($auth){
                 $authDate = date('H:i', $_SESSION['authTime']);
                 echo "$login (Время входа: $authDate GMT+3)";
             }
             else 
                 echo "Здравствуйте, Гость!";       
-        ?></p>
+        ?>
+        </p>
         
         <p class='header__title'> СПА-салон&nbsp; <span class='header__company'> НА ЧИЛЕ</span></p>
         <nav class="header__menu"><ul>
@@ -70,7 +73,6 @@
                 // при первом входе активируется индивидуальная скидка 
                 if($_SESSION[$login]['visits'] == 1){
                     $_SESSION[$login]['endDiscount'] = time() + 86400; // время конца скидки
-                    //$_SESSION['endDiscountTime'] = time() + 86400;
                 }
                 // показ индивидуальной скидки, если прошло меньше суток
                 // выводится при обновлении страницы после первой авторизации. Далее выводится сразу же после авторизации
@@ -192,7 +194,7 @@
             </div>
         </section>
     </main>
-    <script src="js/index.js"></script>
+
     <script src="js/modalBirthday.js"></script>
 </body>
 </html>
