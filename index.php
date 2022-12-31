@@ -69,14 +69,9 @@
             <p class='visit-card__address'>Спа-Салон (г.Благовещенск, ул.Пролетарская, д.5)</p>
             <p class='visit-card__schedule'>Круглосуточно</p>
             <input type="button" class='call-btn' value="Позвоните нам">
-
         </section>
 
         <?php
-            // скидка для ДР
-            $birthdayDiscount = 1; // коэффициент скидки, 0.95 - 5%
-            echo "<div id='discountValue'>$birthdayDiscount</div>";
-
             if($auth){ 
                 // ***** индивидуальная скидка *****
                 // при первом входе активируется индивидуальная скидка 
@@ -103,6 +98,7 @@
                 }               
                 // ****  скидка в честь дня рождения *****
                 // показ диалогового окна ввода даты
+                // на числе $_SESSION[$login]['exit'] завязан вывод окна ввода даты
                 if( $_SESSION[$login]['exit']==0 && !isset($_SESSION[$login.'birthDay'])){
                     $_SESSION[$login]['exit']++;
                     include 'pages/birthdayInputWindow.php';
@@ -123,6 +119,9 @@
                     $_SESSION[$login]['birthday'] = mktime(0,0,0, $birthMonth, $birthDay, $birthYear); // запись ДР в секундах
                     header('Location: index.php');              
                 }
+
+                // коэффициент-скидка для ДР
+                $birthdayDiscount = 1; // коэффициент скидки, 0.95 - 5%
                 // вывод числа дней до ДР
                 // если введен ДР, и сегодня ДР, то сразу же выходит поздравление
                 // иначе при повторных авторизациях
