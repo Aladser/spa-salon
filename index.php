@@ -99,6 +99,8 @@
         ?>                      
                         <script type="text/javascript">
                             let uniqDiscount = document.querySelector('.discount-uniq'); // контейнер индивид.скидки
+                            uniqDiscount.style.display = 'flex';
+
                             let endDiscount = <?=$_SESSION[$login]['endDiscount']?>; // конец скидки
                             let nowTime;
                             let leftDays;
@@ -110,8 +112,9 @@
                                 uniqDiscount.textContent = text;
                             }, 1000);
                         </script>
-        <?php
-                    }    
+        <?php       } else{ ?>
+                        <script type="text/javascript"> uniqDiscount.style.display = 'none'; </script>
+                    <?php }    
                 }               
                 // ****  скидка в честь дня рождения *****
                 // показ диалогового окна ввода даты
