@@ -105,11 +105,15 @@
                             let nowTime;
                             let leftDays;
 
-                            timer = setInterval(() => {
+                            let timerID = setInterval(() => {
                                 nowTime = Math.floor(Date.now()/1000);
                                 leftDays = formatTimeInterval(endDiscount-nowTime);
-                                text = `Для вас индивидуальное предложение! Спешите! Осталось ${leftDays.get('hours')}ч ${leftDays.get('minutes')}мин ${leftDays.get('seconds')}сек.`;
-                                uniqDiscount.textContent = text;
+                                if((endDiscount-nowTime) > 0){
+                                    text = `Для вас индивидуальное предложение! Спешите! Осталось ${leftDays.get('hours')}ч ${leftDays.get('minutes')}мин ${leftDays.get('seconds')}сек.`;
+                                    uniqDiscount.textContent = text;
+                                }
+                                else
+                                    clearTimeout(timerID);
                             }, 1000);
                         </script>
         <?php       } else{ ?>
