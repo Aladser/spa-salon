@@ -1,28 +1,18 @@
 <!DOCTYPE html><html lang="en">
-<!-- подсчет временного интервала в днях, часах, минутах, секундах -->
-<script  type='text/javascript'>
-    function formatTimeInterval(time){
-        const formatInterval = new Map();
-        formatInterval.set('days', parseInt(Math.floor(time/86400)));
-        formatInterval.set('hours', parseInt(Math.floor(time%86400/3600)));
-        formatInterval.set('minutes', parseInt(Math.floor(time%86400%3600/60)));
-        formatInterval.set('seconds', parseInt(Math.floor(time%86400%3600%60)));
-        return formatInterval;
-    }
-</script>
-
 <?php
-    include 'php_scriptes/dateFunc.php'; // функции для работы с датами
-
-    session_start(); 
-    $auth = $_SESSION['auth'] ?? null;
+    include 'php_scriptes/dateFunc.php';
+    session_start();
+    // текущее время
+    $nowTime = time();
+    $nowTime = mktime(0,0,0,date('m', $nowTime),date('d', $nowTime),date('Y', $nowTime));
     // авторизация
     // не используется getCurrentUser(), так как хранится активный пользователь в сессии
+    $auth = $_SESSION['auth'] ?? null;
     if($auth){
         $login = $_SESSION['login']; // активный пользователь
         $_SESSION[$login]['visits']++; // число обновлений страниц активным пользователем
         $birthday =  $_SESSION[$login]['birthday'] ?? false; // ДР
-        $isBirthday = $birthday ? ($birthday - getDateNowInSeconds()) == 0 : false; // флаг, что ДР сегодня
+        $isBirthday = $birthday ? ($birthday - $nowTime) == 0 : false; // флаг, что ДР сегодня
         $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0; // число выходов
     }
     //var_dump($_SESSION);
@@ -39,6 +29,8 @@
 </head>
 
 <body>
+    <script type='text/javascript' src='js/dateFunc.js'></script>
+
     <header class='header'>
         <?php 
             // показ кнопки Вход/выход в личный кабинет
@@ -148,9 +140,10 @@
                 // иначе при повторных авторизациях
                 if($auth && isset($_SESSION[$login]['birthday']) && ($_SESSION[$login]['exit']>1 || $isBirthday))
                 {
-                    $interval = $_SESSION[$login]['birthday'] - getDateNowInSeconds();
+                    $interval = $_SESSION[$login]['birthday'] - $nowTime;
 
                     if($interval!=0){
+
                         $days = getFormatTimeInterval($interval)['days'];
                         $text = "До вашего дня рождения дней: $days";
                     } 
