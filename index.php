@@ -2,20 +2,7 @@
 <html lang="en">
 
 <?php
-    // получить текущее время
-    function getDateNowInSeconds(){
-        $time = time();
-        return mktime(0,0,0,date('m', $time),date('d', $time),date('Y', $time));
-    }
-    // переводит интервал времени в секундах в часы-минуты-секунды
-    function getFormatTimeInterval($time){
-        $interval['days'] = intval(floor($time/86400));
-        $interval['hours'] = intval(floor($time%86400/3600));
-        $interval['minutes'] = intval(floor($time%86400%3600/60));
-        $interval['seconds'] = intval(floor($time%86400%3600%60));
-        return $interval;
-    }
-
+    include 'php_scriptes/dateFunc.php';
     session_start(); 
     $auth = $_SESSION['auth'] ?? null;
     // авторизация
@@ -40,19 +27,19 @@
 </head>
 
 <body>
-    <footer class='footer'>
+    <header class='header'>
         <!-- показ кнопки Вход/выход в личный кабинет -->
         <?php 
             if($auth){
                 echo "<form class='form-auth' method='POST' action='../php_scriptes/exit.php'>";
-                echo "<input type='submit' class='footer_btn footer__btn-exit' value='Выйти'>"; 
+                echo "<input type='submit' class='header__btn header__btn-exit' value='Выйти'>"; 
                 echo "</form>";
            }else{
-                echo "<a class='footer_btn footer_btn-login' href='../pages/login.php'>Войти</a>";
+                echo "<a class='header__btn header__btn-login' href='../pages/login.php'>Войти</a>";
         } 
         ?>
         <!-- отображение имени пользователя. Не используется getCurrentUser(), так как хранится активный пользователь в сессии -->        
-        <p class='footer__user'><?php
+        <p class='header__user'><?php
             if($auth){
                 $authDate = date('H:i', $_SESSION['authTime']);
                 echo "$login (Время входа: $authDate GMT+3)";
@@ -61,15 +48,15 @@
                 echo "Здравствуйте, Гость!";       
         ?></p>
         
-        <p class='footer__title'> СПА-салон&nbsp; <span class='footer__company'> НА ЧИЛЕ</span></p>
-        <nav class="footer__menu"><ul>
+        <p class='header__title'> СПА-салон&nbsp; <span class='header__company'> НА ЧИЛЕ</span></p>
+        <nav class="header__menu"><ul>
             <li><a href="#">Главная</a></li>
             <li><a href="#">Услуги</a></li>
             <li><a href="#">Фотогалерея</a></li>
             <li><a href="#">О нас</a></li>
             <li><a href="#">Контакты</a></li>
         </ul></nav>    
-    </footer>
+    </header>
 
     <main>
         <?php
@@ -138,7 +125,7 @@
                     echo "<p class='discount discount-birthday'>$text</p>";
                 }
                 //показ псевдоэлемента скидки
-                if($birthdayDiscount !=1 ) echo "<style>.service__pricelist li::after{content: ' 5%';}</style>"; 
+                if($birthdayDiscount !=1 ) echo "<style>.service__pricelist li::after{content: ' -5%';}</style>"; 
             }
         ?>
         <section class='container'>
