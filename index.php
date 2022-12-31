@@ -52,7 +52,7 @@
         ?>
         </p>
         
-        <p class='header__title'> СПА-салон&nbsp; <span class='header__company'> НА ЧИЛЕ</span></p>
+        <p class='header__title'> <img src="img/icon.png" alt="СПА-салон"> НА ЧИЛЕ</p>
         <nav class="header__menu"><ul>
             <li><a href="#">Главная</a></li>
             <li><a href="#">Услуги</a></li>
@@ -63,6 +63,15 @@
     </header>
 
     <main>
+
+        <section class='container visit-card'>
+            <p class='visit-card__company-name'> На Чиле </p>
+            <p class='visit-card__address'>Спа-Салон (г.Благовещенск, ул.Пролетарская, д.5)</p>
+            <p class='visit-card__schedule'>Круглосуточно</p>
+            <input type="button" class='call-btn' value="Позвоните нам">
+
+        </section>
+
         <?php
             // скидка для ДР
             $birthdayDiscount = 1; // коэффициент скидки, 0.95 - 5%
@@ -106,9 +115,10 @@
                     $birthDate = explode('-', $_POST['birthday']);
                     $birthDay = $birthDate[2];
                     $birthMonth = $birthDate[1];
+
                     if($birthMonth>date('m')) $birthYear = date('Y');
                     elseif($birthMonth===date('m') && $birthDay>=date('d')) $birthYear = date('Y');
-                    else $birthYear = date('Y')+1;
+                    else $birthYear = date('Y')+1;          
     
                     $_SESSION[$login]['birthday'] = mktime(0,0,0, $birthMonth, $birthDay, $birthYear); // запись ДР в секундах
                     header('Location: index.php');              
@@ -120,7 +130,7 @@
                 {
                     $interval = $_SESSION[$login]['birthday'] - getDateNowInSeconds();
                     if($interval!=0){
-                        $text = 'До вашего дня рождения осталось '.getFormatTimeInterval($interval)['days'].' дней';
+                        $text = 'До вашего дня рождения осталось дней: '.getFormatTimeInterval($interval)['days'];
                     } 
                     else{
                         $text = 'О, у вас день рождения. Поздравляем! Сегодня дарим вас скидку 5% на все наши услуги';
@@ -194,6 +204,14 @@
             </div>
         </section>
     </main>
+
+    <footer class='footer'>
+            <p>г.Благовещенск, ул.Пролетарская, д.5</p>
+            <p>8 (421) 299-99-99</p>
+            <p>Электронная почта:test@test.ru</p>
+            <p>Номер медицинской лицензии ЛО-76-01-002267 от 25.02.2020 г.</p>
+            <p>СПА Салон ООО "На чиле"</p>
+    </footer>
 
     <script src="js/modalBirthday.js"></script>
 </body>
