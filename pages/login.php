@@ -7,7 +7,7 @@
     <title> СПА-салон: авторизация </title>
 </head>
 <body>
-    <section class='loginSection'><form method="POST" action='../php_scriptes/authorization.php'>
+    <section class='loginSection'><form method="POST" action='../php_scriptes/auth.php'>
         <h3 class='loginSection__header'> Авторизация</h3>
 
         <?php
