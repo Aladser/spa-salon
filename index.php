@@ -80,9 +80,8 @@
                 else{
                     $pagesUpdates =  $_SESSION[$login]['visits']; // число обновлений страницы
                     $isDiscount = time()<$_SESSION[$login]['endDiscount']; // прошло < 24 часов?
-                    $isWritenBirthday = isset($_SESSION['borzenko_ysBirthday']); // записана дата рождения?
                       
-                    if( ($pagesUpdates>0 && $isDiscount && !$isWritenBirthday) || ($pagesUpdates>0 && $isDiscount && $isWritenBirthday)){
+                    if($pagesUpdates>0 && $isDiscount){
         ?>                      
                         <script type="text/javascript">
                             let uniqDiscount = document.querySelector('.discount-uniq'); // контейнер индивид.скидки
