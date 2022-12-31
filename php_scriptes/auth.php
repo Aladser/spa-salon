@@ -12,7 +12,7 @@
             $_SESSION['auth'] = true; // флаг аутентицикации
             $_SESSION['login'] = $login; // текущий пользователь
             
-            //$_SESSION[$login] = $_SESSION[$login] ?? 0; // число посещений сайта(index.php) текущего пользователя
+            // число посещений сайта(index.php) текущего пользователя
             $_SESSION[$login]['visits'] = $_SESSION[$login]['visits'] ?? 0;
 
             $_SESSION['authTime'] = time(); // время авторизации

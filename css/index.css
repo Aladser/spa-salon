@@ -162,7 +162,7 @@ a{text-decoration: none;}
     color: white;
     text-shadow: 1px 1px black;
 }
-.call-btn{
+.btn{
     height: 5vh;
     width: 8vw;
     margin-top: 1vh;
@@ -174,14 +174,11 @@ a{text-decoration: none;}
 
     font-size: 1rem;
 }
-.call-btn:hover{
+.btn:hover{
     background-color: white;
     color: blueviolet;
     border: 2px solid blueviolet;
     cursor: pointer;
-}
-.call-btn:active{
-    background-color: rgb(230, 230, 230);
 }
 
 .services-container{

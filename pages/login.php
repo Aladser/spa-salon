@@ -13,10 +13,10 @@
 
         <?php
             session_start();
+            
             // вывод сообщения о неправильном логине или пароле
             $nouser = $_SESSION['nouser'] ?? null;
             $wrongPassword = $_SESSION['wrongpassword'] ?? null;
-
             if($nouser){
                 echo "<div class='error'>Пользователь не существует</div>";
                 unset($_SESSION['nouser']);

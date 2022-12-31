@@ -7,6 +7,7 @@
     session_start(); 
     $auth = $_SESSION['auth'] ?? null;
     // авторизация
+    // не используется getCurrentUser(), так как хранится активный пользователь в сессии
     if($auth){
         $login = $_SESSION['login']; // активный пользователь
         $_SESSION[$login]['visits']++; // число обновлений страниц активным пользователем
@@ -29,8 +30,8 @@
 
 <body>
     <header class='header'>
-        <!-- показ кнопки Вход/выход в личный кабинет -->
         <?php 
+            // показ кнопки Вход/выход в личный кабинет
             if($auth){
                 echo "<form class='form-auth' method='POST' action='../php_scriptes/exit.php'>";
                 echo "<input type='submit' class='header__btn header__btn-exit' value='Выйти'>"; 
@@ -38,19 +39,16 @@
            }else{
                 echo "<a class='header__btn header__btn-login' href='../pages/login.php'>Войти</a>";
             } 
-        ?>
-
-        <!-- отображение имени пользователя. Не используется getCurrentUser(), так как хранится активный пользователь в сессии -->        
-        <p class='header__user'>
-        <?php
+            // отображение имени пользователя        
+            echo "<p class='header__user'>"; 
             if($auth){
                 $authDate = date('H:i', $_SESSION['authTime']);
                 echo "$login (Время входа: $authDate GMT+3)";
             }
             else 
-                echo "Здравствуйте, Гость!";       
+                echo "Здравствуйте, Гость!";
+            echo '</p>';        
         ?>
-        </p>
         
         <p class='header__title'> <img src="img/icon.png" alt="СПА-салон"> НА ЧИЛЕ</p>
         <nav class="header__menu"><ul>
@@ -68,7 +66,7 @@
             <p class='visit-card__company-name'> На Чиле </p>
             <p class='visit-card__address'>Спа-Салон (г.Благовещенск, ул.Пролетарская, д.5)</p>
             <p class='visit-card__schedule'>Круглосуточно</p>
-            <input type="button" class='call-btn' value="Позвоните нам">
+            <input type="button" class='btn btn-call' value="Позвоните нам">
         </section>
 
         <?php
@@ -128,7 +126,7 @@
                 {
                     $interval = $_SESSION[$login]['birthday'] - getDateNowInSeconds();
                     if($interval!=0){
-                        $text = 'До вашего дня рождения осталось дней: '.getFormatTimeInterval($interval)['days'];
+                        $text = 'До вашего дня рождения дней: '.getFormatTimeInterval($interval)['days'];
                     } 
                     else{
                         $text = 'О, у вас день рождения. Поздравляем! Сегодня дарим вас скидку 5% на все наши услуги';
@@ -216,6 +214,7 @@
             <p>СПА Салон ООО "На чиле"</p>
     </footer>
 
+    <script src="js/index.js"></script>
     <script src="js/modalBirthday.js"></script>
 </body>
 </html>
