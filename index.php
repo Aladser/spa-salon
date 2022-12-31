@@ -165,6 +165,11 @@
                 </ul>
             </section>
 
+            <section class='service action-container'> 
+                <p class='action-container__action'>Для пар скидка 20% по будням в вечерние часы </p>
+                <p class='action-container__action'>В честь Нового года вы можете приобрести годовой абонемент со скидкой 10% до 7 января</p>
+            </section>
+
             <section class='service'>
                 <h3 class='service-title'>Массаж "Тоник" (лимфодренажный)</h3>
                 <img src="img/srv3.png" alt="">
