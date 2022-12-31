@@ -1,5 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
+<!-- подсчет временного интервала в днях, часах, минутах, секундах -->
+<script  type='text/javascript'>
+    function formatTimeInterval(time){
+        const formatInterval = new Map();
+        formatInterval.set('days', parseInt(Math.floor(time/86400)));
+        formatInterval.set('hours', parseInt(Math.floor(time%86400/3600)));
+        formatInterval.set('minutes', parseInt(Math.floor(time%86400%3600/60)));
+        formatInterval.set('seconds', parseInt(Math.floor(time%86400%3600%60)));
+        return formatInterval;
+    }
+</script>
 
 <?php
     include 'php_scriptes/dateFunc.php'; // функции для работы с датами
@@ -61,13 +71,13 @@
     </header>
 
     <main>
-
         <section class='container visit-card'>
             <p class='visit-card__company-name'> На Чиле </p>
             <p class='visit-card__address'>Спа-Салон (г.Благовещенск, ул.Пролетарская, д.5)</p>
             <p class='visit-card__schedule'>Круглосуточно</p>
             <input type="button" class='btn btn-call' value="Позвоните нам">
-        </section>
+        </section>  
+        <p class='discount discount-uniq'></p>
 
         <?php
             // коэффициент-скидка для ДР
@@ -85,15 +95,22 @@
                     $isDiscount = time()<$_SESSION[$login]['endDiscount']; // прошло < 24 часов?
                     $isWritenBirthday = isset($_SESSION['borzenko_ysBirthday']); // записана дата рождения?
                       
-                    if( ($pagesUpdates>0 && $isDiscount && !$isWritenBirthday) || ($pagesUpdates>1 && $isDiscount && $isWritenBirthday)){
-                        $leftTime = getFormatTimeInterval($_SESSION[$login]['endDiscount']-time());
-    
-                        echo "<p class='discount discount-uniq'>";
-                        echo "Для вас индивидуальное предложение! Спешите!  Осталось ";
-                        echo $leftTime['hours'].'ч. ';
-                        echo $leftTime['minutes'].'мин. ';
-                        echo $leftTime['seconds'].'с.';
-                        echo "</p>";
+                    if( ($pagesUpdates>0 && $isDiscount && !$isWritenBirthday) || ($pagesUpdates>0 && $isDiscount && $isWritenBirthday)){
+        ?>                      
+                        <script type="text/javascript">
+                            let uniqDiscount = document.querySelector('.discount-uniq'); // контейнер индивид.скидки
+                            let endDiscount = <?=$_SESSION[$login]['endDiscount']?>; // конец скидки
+                            let nowTime;
+                            let leftDays;
+
+                            timer = setInterval(() => {
+                                nowTime = Math.floor(Date.now()/1000);
+                                leftDays = formatTimeInterval(endDiscount-nowTime);
+                                text = `Для вас индивидуальное предложение! Спешите! Осталось ${leftDays.get('hours')}ч ${leftDays.get('minutes')}мин ${leftDays.get('seconds')}сек.`;
+                                uniqDiscount.textContent = text;
+                            }, 1000);
+                        </script>
+        <?php
                     }    
                 }               
                 // ****  скидка в честь дня рождения *****
@@ -125,8 +142,10 @@
                 if($auth && isset($_SESSION[$login]['birthday']) && ($_SESSION[$login]['exit']>1 || $isBirthday))
                 {
                     $interval = $_SESSION[$login]['birthday'] - getDateNowInSeconds();
+
                     if($interval!=0){
-                        $text = 'До вашего дня рождения дней: '.getFormatTimeInterval($interval)['days'];
+                        $days = getFormatTimeInterval($interval)['days'];
+                        $text = "До вашего дня рождения дней: $days";
                     } 
                     else{
                         $text = 'О, у вас день рождения. Поздравляем! Сегодня дарим вас скидку 5% на все наши услуги';
@@ -138,6 +157,7 @@
                 if($birthdayDiscount !=1 ) echo "<style>.service__pricelist li::after{content: ' -5%';}</style>"; 
             }
         ?>
+
         <section class='container'>
             <h2 class='services-container__title'>Услуги</h2>
             <div class='services-container'>
@@ -213,8 +233,7 @@
             <p>Номер медицинской лицензии ЛО-76-01-002267 от 25.02.2020 г.</p>
             <p>СПА Салон ООО "На чиле"</p>
     </footer>
-
-    <script src="js/index.js"></script>
-    <script src="js/modalBirthday.js"></script>
+    <script type='text/javascript' src='js/modalBirthday.js'></script>
+    <script type='text/javascript' src='js/index.js'></script>
 </body>
 </html>
