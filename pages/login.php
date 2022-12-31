@@ -27,7 +27,7 @@
         <div class='form-row'>
             <label for="login-input" class='form-row__label'>Логин:</label>
             <!-- показ логина, если неправильный пароль или выход из личного кабинета-->
-            <input type='text' class='login-input' name='login' id='login-input' autocomplete='off' value='borzenko_ys'>
+            <input type='text' class='login-input' name='login' id='login-input' autocomplete='off' value='admin'>
             <?php
                 $login = $_SESSION['login'] ?? null;
                 if($wrongPassword) unset($_SESSION['wrongpassword']);
@@ -35,7 +35,7 @@
         </div>
         <div class='form-row'>
             <label for="password-input" class='form-row__label'>Пароль:</label>
-            <input type="password" class='password-input' name='password' id='password-input' autocomplete="off" value='borzenko_ys'>
+            <input type="password" class='password-input' name='password' id='password-input' autocomplete="off" value='admin'>
         </div>
         <div class='form-row form-btn-row'>
             <input class='btn-submit' type="submit" value='Войти'>

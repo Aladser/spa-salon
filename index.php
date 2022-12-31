@@ -33,9 +33,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/icon.png">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/modal.css">
-    <title> СПА-салон </title>
+    <title> СПА-салон «На Чиле»</title>
 </head>
 
 <body>
@@ -72,6 +73,10 @@
 
     <main>
         <?php
+            // скидка для ДР
+            $birthdayDiscount = 1; // коэффициент скидки, 0.95 - 5%
+            echo "<div id='discountValue'>$birthdayDiscount</div>";
+
             if($auth){ 
                 // ***** индивидуальная скидка *****
                 // при первом входе активируется индивидуальная скидка 
@@ -88,7 +93,7 @@
                     if( ($pagesUpdates>0 && $isDiscount && !$isWritenBirthday) || ($pagesUpdates>1 && $isDiscount && $isWritenBirthday)){
                         $leftTime = getFormatTimeInterval($_SESSION['endDiscountTime']-time());
     
-                        echo "<p class='container discount-container'>";
+                        echo "<p class='discount discount-uniq'>";
                         echo "Для вас индивидуальное предложение! Спешите!  Осталось ";
                         echo $leftTime['hours'].'ч. ';
                         echo $leftTime['minutes'].'мин. ';
@@ -118,82 +123,87 @@
                     header('Location: index.php');              
                 }
                 // вывод числа дней до ДР
-                // если введен ДР и сегодня ДР, то сразу же выходит поздравление
+                // если введен ДР, и сегодня ДР, то сразу же выходит поздравление
                 // иначе при повторных авторизациях
                 if($auth && isset($_SESSION[$login.'Birthday']) && ($_SESSION[$login.'IsExit']>1 || $isBirthday))
                 {
                     $interval = $_SESSION[$login.'Birthday'] - getDateNowInSeconds();
-                    if($interval!=0)
-                        $text = 'До вашего дня рождения осталось '.getFormatTimeInterval($interval)['days'].' дней'; 
-                    else 
-                        $text = 'О, сегодня ваш день рождения. Поздравляем! Сегодня дарим вас скидку 5% на все наши услуги';
-                    echo "<p class='container'>$text</p>";
+                    if($interval!=0){
+                        $text = 'До вашего дня рождения осталось '.getFormatTimeInterval($interval)['days'].' дней';
+                    } 
+                    else{
+                        $text = 'О, у вас день рождения. Поздравляем! Сегодня дарим вас скидку 5% на все наши услуги';
+                        $birthdayDiscount = 0.95;
+                    }
+                    echo "<p class='discount discount-birthday'>$text</p>";
                 }
+                //показ псевдоэлемента скидки
+                if($birthdayDiscount !=1 ) echo "<style>.service__pricelist li::after{content: ' 5%';}</style>"; 
             }
         ?>
         <section class='container'>
-            <h2>Услуги</h2>
+            <h2 class='services-container__title'>Услуги</h2>
             <div class='services-container'>
             <section class='service'>
-                <h3>Традиционный тайский массаж</h3>
+                <h3 class='service-title'>Традиционный тайский массаж</h3>
                 <img src="img/srv1.png" alt="">
                 <p class='service__info'>Для здоровья и улучшения общего самочувствия.</p>
                 <ul class='service__pricelist'>
-                    <li>60 минут — 3600₽</li>
-                    <li>90 минут — 5400₽</li>
-                    <li>120 минут — 7200₽</li>
+                    <li>60 минут — <?php echo 3600*$birthdayDiscount.'₽'?></li>
+                    <li>90 минут — <?php echo 5400*$birthdayDiscount.'₽' ?></li>
+                    <li>120 минут — <?php echo 7200*$birthdayDiscount.'₽' ?></li>
                 </ul>
             </section>
 
             <section class='service'> 
-                <h3>Массаж "Релакс"</h3>
+                <h3 class='service-title'>Массаж "Релакс"</h3>
                 <img src="img/srv2.png" alt="">
                 <p class='service__info'>Массаж расслабляет все тело, уходят зажимы, восстанавливается подвижность тела.</p>
                 <ul class='service__pricelist'>
-                    <li>60 минут — 3600₽</li>
-                    <li>90 минут — 5400₽</li>
-                    <li>120 минут — 7200₽</li>
+                    <li>60 минут — <?php echo 3600*$birthdayDiscount ?>₽</li>
+                    <li>90 минут — <?php echo 5400*$birthdayDiscount ?>₽</li>
+                    <li>120 минут — <?php echo 7200*$birthdayDiscount ?>₽</li>
                 </ul>
             </section>
 
             <section class='service'>
-                <h3>Массаж "Тоник" (лимфодренажный)</h3>
+                <h3 class='service-title'>Массаж "Тоник" (лимфодренажный)</h3>
                 <img src="img/srv3.png" alt="">
                 <p class='service__info'>Выполняется движениями от конечностей к центру тела.
                     Перед массажем нужно выпить стакан воды. 
                     Хорошо устраняет отечность тела. Легкость, здоровье, стройность.</p>
                 <ul class='service__pricelist'>
-                    <li>60 минут — 3900₽</li>
-                    <li>90 минут — 5850₽</li>
-                    <li>120 минут — 7800₽</li>
+                    <li>60 минут — <?php echo 3900*$birthdayDiscount ?>₽</li>
+                    <li>90 минут — <?php echo 5800*$birthdayDiscount ?>₽</li>
+                    <li>120 минут — <?php echo 7800*$birthdayDiscount ?>₽</li>
                 </ul>
             </section>
 
             <section class='service'>
-                <h3>SPA-ритуал "ШокоСПА "</h3>
+                <h3 class='service-title'>SPA-ритуал "ШокоСПА "</h3>
                 <img src="img/srv4.png" alt="">
                 <p class='service__info'>Баунти — самая экзотическая программа со вкусом кокоса и натурального темного шоколада.
                 Кокосовое молоко, мякоть и живительное кокосовое масло с древних времен используют в Таиланде 
                 для оздоровления всего организма, ухода за кожей и волосами.</p>
                 <ul class='service__pricelist'>
-                    <li>150 минут — 9000₽</li>
+                    <li>150 минут — <?php echo 9000*$birthdayDiscount ?>₽</li>
                 </ul>
             </section>
 
             <section class='service'>
-                <h3>SPA-ритуал "Королевский лотос"</h3>
+                <h3 class='service-title'>SPA-ритуал "Королевский лотос"</h3>
                 <img src="img/srv5.png" alt="">
                 <p class='service__info'>Программа, созданная на основе экстрактов цветов королевского лотоса. 
                 Вначале — исцеляющая парная или сауна, для разогревания мышц и очищения кожи. 
                 Затем — ароматный пилинг с эфирным маслом тайского королевского лотоса. Расслабляющий тайский массаж с горячим маслом.</p>
                 <ul class='service__pricelist'>
-                    <li>120 минут — 7200₽</li>
+                    <li>120 минут — <?php echo 7200*$birthdayDiscount ?>₽</li>
                 </ul>
             </section>
             </div>
         </section>
     </main>
-
-    <script src="../js/modalBirthday.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/modalBirthday.js"></script>
 </body>
 </html>

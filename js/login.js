@@ -7,4 +7,4 @@ const checkTextInputs = () => btn.disabled = loginInput.value!='' && passwordInp
 loginInput.addEventListener('input', () => checkTextInputs());
 passwordInput.addEventListener('input', () => checkTextInputs());
 
-passwordInput.addEventListener('click', function(){this.value = '';});
+passwordInput.addEventListener('click', function(){this.value = '';}); // при клике пароль удаляется

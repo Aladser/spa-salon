@@ -1,6 +1,6 @@
 <?php session_start() ?>
 
-<section id='bithdayInputSection' class='modal modal_active'>
+<section id='birthdayInputSection' class='modal modal_active'>
     <div class="modal__content">
         <button class="modal__close-button">x</button>
         <h1 class="modal__title">Введите вашу дату рождения</h1>

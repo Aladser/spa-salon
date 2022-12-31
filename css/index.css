@@ -4,11 +4,11 @@
     overflow-x: hidden;
 }
 body{padding: 0.25rem;}
+main{position:relative}
+a{text-decoration: none;}
+#discountValue{display: none;} /* значение скидки, полученное из php */
 
-a{
-    text-decoration: none;
-}
-
+/* футер */
 .footer{
     position: relative;
     height: 8vh;
@@ -115,19 +115,50 @@ a{
     color: white;
 }
 
+/* скидки */
+.discount{
+    position: absolute;
+    top: 1vh;
+    width: 16.5vw;
+    height: 15vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+    background-color: blueviolet;
+    color: white;
+
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+/* индивидуальная скидка */
+.discount-uniq{
+    right: 0.1vw;
+}
+
 /* общий контейнер для контента */
 .container{
     text-align: center;
     width: 60%;
     margin: auto;
-    margin-top: 0.5rem;
+    margin-top: 0.8rem;
     padding: 1rem 0rem;
+    border-right: 3px dotted blueviolet;
+    border-left: 3px dotted blueviolet;
 }
 .services-container{
     margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
     justify-content:space-around;
+}
+
+.services-container__title, .service-title{
+    color: blueviolet;
+    font-family: Arial, Helvetica, sans-serif;
 }
 /* контейнер услуги */
 .service{
@@ -138,10 +169,23 @@ a{
 }
 
 .service__info{
+    color: rgb(48, 48, 48);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     padding: 1rem;
 }
 .service__pricelist{
     list-style: none;
     margin-top: 0.5rem;
     font-weight: bolder;
+}
+.service__pricelist li{
+    margin-bottom: 0.5vh;
+}
+.service__pricelist li::after{
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-left: 0.5vw;
+    background-color: blueviolet;
+    color: white;
+    padding: 0rem 1rem;
 }

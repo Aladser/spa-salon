@@ -1,4 +1,4 @@
-let bithdayInputWindow = document.querySelector('#bithdayInputSection');
+let bithdayInputWindow = document.querySelector('#birthdayInputSection');
 let bithdayInput = document.querySelector('.modal__birthday');
 let sendBtn = document.querySelector('#send-btn');
 let congratWindow = document.querySelector('#congratSection');
@@ -24,9 +24,4 @@ sendBtn.addEventListener('click', ()=>{
     if(inputDay === nowDay && inputMonth === nowMonth){
         congratWindow.className = 'modal modal_active';
     }
-});
-
-// закрытие поздравления
-document.querySelector('#close-congrat-btn').addEventListener('click', () => {
-    congratWindow.className = 'modal';
 });
