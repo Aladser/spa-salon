@@ -5,14 +5,13 @@
     // текущее время
     $nowTime = time();
     $nowTime = mktime(0,0,0,date('m', $nowTime),date('d', $nowTime),date('Y', $nowTime));
-    // авторизация
+    
     // не используется getCurrentUser(), так как хранится активный пользователь в сессии
-    $auth = $_SESSION['auth'] ?? null;
+    $auth = $_SESSION['auth'] ?? null; // авторизация
+    $login = $_SESSION['login'] ?? null; // активный пользователь
     if($auth){
-        $login = $_SESSION['login']; // активный пользователь
         $_SESSION[$login]['visits']++; // число обновлений страниц активным пользователем
         $birthday =  $_SESSION[$login]['birthday'] ?? false; // ДР
-        $isBirthday = $birthday ? ($birthday - $nowTime) == 0 : false; // флаг, что ДР сегодня
         $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0; // число выходов
     }
     //var_dump($_SESSION);
@@ -30,6 +29,7 @@
 
 <body>
     <script type='text/javascript' src='js/dateFunc.js'></script>
+    <p style='display:none' id='srvTime'> <?= date('H') ?> </p>
 
     <header class='header'>
         <?php 
@@ -40,19 +40,14 @@
                 echo "</form>";
            }else{
                 echo "<a class='header__btn header__btn-login' href='../pages/login.php'>Войти</a>";
-            } 
-            // отображение имени пользователя        
-            echo "<p class='header__user'>"; 
-            if($auth){
-                $authDate = date('H:i', $_SESSION['authTime']);
-                echo "$login (Время входа: $authDate GMT+3)";
             }
-            else 
-                echo "Здравствуйте, Гость!";
-            echo '</p>';        
+            $authDate = $_SESSION['authTime'] ?? null;        
         ?>
-        
+        <!-- имя пользователя и время входа формируется в js-скрипте -->
+        <p class='header__user'> <?php echo $login ? "$login-$authDate" : null ?> </p>
+        <!-- заголовок -->
         <p class='header__title'> <img src="img/icon.png" alt="СПА-салон"> НА ЧИЛЕ</p>
+        <!-- меню навигации -->
         <nav class="header__menu"><ul>
             <li><a href="#">Главная</a></li>
             <li><a href="#">Услуги</a></li>
@@ -115,7 +110,7 @@
                 // ****  скидка в честь дня рождения *****
                 // показ диалогового окна ввода даты
                 // на числе $_SESSION[$login]['exit'] завязан вывод окна ввода даты
-                if( $_SESSION[$login]['exit']==0 && !isset($_SESSION[$login.'birthDay'])){
+                if( $_SESSION[$login]['exit']==0){
                     $_SESSION[$login]['exit']++;
                     include 'pages/birthdayInputWindow.php';
                 }
@@ -138,6 +133,7 @@
                 // вывод числа дней до ДР
                 // если введен ДР, и сегодня ДР, то сразу же выходит поздравление
                 // иначе при повторных авторизациях
+                $isBirthday = $birthday ? ($birthday - $nowTime) == 0 : false; // флаг, что ДР сегодня
                 if($auth && isset($_SESSION[$login]['birthday']) && ($_SESSION[$login]['exit']>1 || $isBirthday))
                 {
                     $interval = $_SESSION[$login]['birthday'] - $nowTime;

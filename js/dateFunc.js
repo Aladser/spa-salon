@@ -16,3 +16,4 @@ function getDateNowInSeconds(){
     now.setMilliseconds(0);
     return Date.parse(now); 
 }
+

@@ -6,7 +6,6 @@
 body{padding: 0.25rem;}
 main{position:relative}
 a{text-decoration: none;}
-#discountValue{display: none;} /* значение скидки, полученное из php */
 
 /* шапка */
 .header{
