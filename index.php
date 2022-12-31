@@ -8,7 +8,10 @@
     // авторизация
     if($auth){
         $login = $_SESSION['login']; // активный пользователь
-        $_SESSION[$login]++; // число посещений активным пользователем
+
+        $_SESSION[$login]['visits']++;
+        //$_SESSION[$login]++; // число посещений активным пользователем
+
         $birthday =  $_SESSION[$login.'Birthday'] ?? false; // ДР
         $isBirthday = $birthday ? ($birthday - getDateNowInSeconds()) == 0 : false; // флаг, что ДР сегодня
         $_SESSION[$login.'IsExit'] = $_SESSION[$login.'IsExit'] ?? 0; // число выходов
@@ -67,13 +70,13 @@
             if($auth){ 
                 // ***** индивидуальная скидка *****
                 // при первом входе активируется индивидуальная скидка 
-                if($_SESSION[$login] == 1){
+                if($_SESSION[$login]['visits'] == 1){
                     $_SESSION['endDiscountTime'] = time() + 86400; // время конца скидки
                 }
                 // показ индивидуальной скидки, если прошло меньше суток
                 // выводится при обновлении страницы после первой авторизации. Далее выводится сразу же после авторизации
                 else{
-                    $pagesUpdates =  $_SESSION[$login]; // число обновлений страницы
+                    $pagesUpdates =  $_SESSION[$login]['visits']; // число обновлений страницы
                     $isDiscount = time()<$_SESSION['endDiscountTime']; // прошло < 24 часов?
                     $isWritenBirthday = isset($_SESSION['borzenko_ysBirthday']); // записана дата рождения?
                       
@@ -96,7 +99,7 @@
                 }
                 // отлов формы ввода ДР
                 if (isset($_POST['birthday'])){
-                    $_SESSION[$login]-=2; // не учитывается редирект
+                    $_SESSION[$login]['visits']-=2; // не учитывается редирект
                     
                     // формирование даты ДР для подсчета числа дней до него
                     $birthDate = explode('-', $_POST['birthday']);
