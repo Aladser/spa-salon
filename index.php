@@ -142,7 +142,7 @@
             <h2 class='services-container__title'>Услуги</h2>
             <div class='services-container'>
             <section class='service'>
-                <h3 class='service-title'>Традиционный тайский массаж</h3>
+                <h3 class='service__title'>Традиционный тайский массаж</h3>
                 <img src="img/srv1.png" alt="">
                 <p class='service__info'>Для здоровья и улучшения общего самочувствия.</p>
                 <ul class='service__pricelist'>
@@ -153,7 +153,7 @@
             </section>
 
             <section class='service'> 
-                <h3 class='service-title'>Массаж "Релакс"</h3>
+                <h3 class='service__title'>Массаж "Релакс"</h3>
                 <img src="img/srv2.png" alt="">
                 <p class='service__info'>Массаж расслабляет все тело, уходят зажимы, восстанавливается подвижность тела.</p>
                 <ul class='service__pricelist'>
@@ -169,7 +169,7 @@
             </section>
 
             <section class='service'>
-                <h3 class='service-title'>Массаж "Тоник" (лимфодренажный)</h3>
+                <h3 class='service__title'>Массаж "Тоник" (лимфодренажный)</h3>
                 <img src="img/srv3.png" alt="">
                 <p class='service__info'>Выполняется движениями от конечностей к центру тела.
                     Перед массажем нужно выпить стакан воды. 
@@ -182,7 +182,7 @@
             </section>
 
             <section class='service'>
-                <h3 class='service-title'>SPA-ритуал "ШокоСПА "</h3>
+                <h3 class='service__title'>SPA-ритуал "ШокоСПА "</h3>
                 <img src="img/srv4.png" alt="">
                 <p class='service__info'>Баунти — самая экзотическая программа со вкусом кокоса и натурального темного шоколада.
                 Кокосовое молоко, мякоть и живительное кокосовое масло с древних времен используют в Таиланде 
@@ -193,7 +193,7 @@
             </section>
 
             <section class='service'>
-                <h3 class='service-title'>SPA-ритуал "Королевский лотос"</h3>
+                <h3 class='service__title'>SPA-ритуал "Королевский лотос"</h3>
                 <img src="img/srv5.png" alt="">
                 <p class='service__info'>Программа, созданная на основе экстрактов цветов королевского лотоса. 
                 Вначале — исцеляющая парная или сауна, для разогревания мышц и очищения кожи. 
