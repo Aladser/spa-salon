@@ -33,25 +33,15 @@ a{text-decoration: none;}
 
     border: none;
     border-right: 2px solid white;
+
+    color: white;
+    background-color: blueviolet;
 }
 .header__btn:hover{
     cursor: pointer;
     background-color: white;
     color: blueviolet;
     border: 1px solid blueviolet;
-}
-.header__btn-exit{
-    height: 100%;
-
-    color: white;
-    background: none;
-
-    font-size: 1.6vh;
-}
-.header__btn-login{
-    height: 100%;
-    background-color: blueviolet;
-    color: white;
 }
 
 .header__user{

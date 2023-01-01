@@ -4,11 +4,13 @@
     
     $auth = $_SESSION['auth'] ?? null; // авторизация
     $login = $_SESSION['login'] ?? null; // активный пользователь
+    $authDate = $_SESSION['authTime'] ?? null;  // время авторизации
     if($auth){
         $_SESSION[$login]['visits']++; // число обновлений страницы активным пользователем
         $birthday =  $_SESSION[$login]['birthday'] ?? false; // ДР
         $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0; // число выходов
     }
+
     //var_dump($_SESSION);
 ?>
 
@@ -26,18 +28,12 @@
     <script type='text/javascript' src='js/dateFunc.js'></script>
 
     <header class='header'>
-    <?php 
-        // показ кнопки Вход/выход в личный кабинет
-        if($auth){
-            echo "<form class='form-auth' method='POST' action='../php_scriptes/exit.php'>";
-            echo "<input type='submit' class='header__btn header__btn-exit' value='Выйти'>"; 
-            echo "</form>";
-        }else{
-            echo "<a class='header__btn header__btn-login' href='../pages/login.php'>Войти</a>";
-        }
-        $authDate = $_SESSION['authTime'] ?? null;        
-    ?>
-    <!-- имя пользователя и время входа формируется в js -->
+    <!-- Кнопка входа/выхода -->
+    <?php $action = $auth ? '../php_scriptes/exit.php' : '../pages/login.php' ?>
+    <form class='form-auth' method='POST' action= <?=$action?>>
+        <input type='submit' class='header__btn' value= <?=$auth ? 'Выйти' : 'Войти'?>>
+    </form>
+    <!-- имя пользователя и время входа -->
     <p class='header__user'> <?php echo $login ? "$login-$authDate" : null ?> </p>
     <!-- заголовок -->
     <p class='header__title'> <img src="img/icon.png" alt="СПА-салон"> НА ЧИЛЕ</p>
@@ -61,6 +57,7 @@
     <p class='discount discount-uniq'></p>
 
     <?php
+    
         if($auth){ 
             // ***** индивидуальная скидка *****
             // при первом входе активируется индивидуальная скидка 
