@@ -89,6 +89,7 @@
     ?>
     <!-- индивидуальная скидка -->
     <p style='display:none' id='uniqDiscountValue'><?=$auth.'-'.$_SESSION[$login]['visits'].'-'.$_SESSION[$login]['endDiscount']?></p>
+    
     <p class='discount discount-uniq'></p>
     <!-- контейнер числа дней до ДР -->
     <?php

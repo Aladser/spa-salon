@@ -24,9 +24,6 @@
     function checkPassword($login, $password){
         global $users;
         $hash = md5($password);
-        if(existsUser($login))
-            return $users[$login] === $hash;
-        else
-            return false; 
+        return existsUser($login) ? $users[$login] === $hash : false;   
     } 
 ?>

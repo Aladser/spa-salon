@@ -23,5 +23,5 @@ function getDateNowInSeconds(){
     now.setMinutes(0);
     now.setSeconds(0);
     now.setMilliseconds(0);
-    return Date.parse(now)/1000; 
+    return Math.floor(Date.parse(now)/1000); 
 }
