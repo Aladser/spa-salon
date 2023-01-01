@@ -77,8 +77,7 @@
                         uniqDiscount.style.display = 'flex';
 
                         let endDiscount = <?=$_SESSION[$login]['endDiscount']?>; // конец скидки
-                        let nowTime;
-                        let leftDays;
+                        let nowTime, leftDays;
 
                         let timerID = setInterval(() => {
                             nowTime = Math.floor(Date.now()/1000);
@@ -87,8 +86,7 @@
                                 text = `Для вас индивидуальное предложение! Спешите! Осталось ${leftDays.get('hours')}ч ${leftDays.get('minutes')}мин ${leftDays.get('seconds')}сек.`;
                                 uniqDiscount.textContent = text;
                             }
-                            else
-                                clearTimeout(timerID);
+                            else clearTimeout(timerID);
                         }, 1000);
                     </script>
     <?php       } else{ ?>

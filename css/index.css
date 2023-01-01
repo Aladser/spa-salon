@@ -101,6 +101,7 @@ a{text-decoration: none;}
     color: white;
 }
 
+
 /* скидки */
 .discount{
     position: absolute;
@@ -127,6 +128,8 @@ a{text-decoration: none;}
 .discount-birthday{
     display: none;
 }
+
+
 /* общий контейнер для контента */
 .container{
     text-align: center;
@@ -154,6 +157,7 @@ a{text-decoration: none;}
     color: white;
     text-shadow: 1px 1px black;
 }
+
 .btn{
     height: 5vh;
     width: 8vw;
@@ -215,6 +219,7 @@ a{text-decoration: none;}
 .service__pricelist li{
     margin-bottom: 1vh;
 }
+
 /* показ скидки */
 .price-discount::after{
     content: ' -5%';
