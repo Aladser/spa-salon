@@ -34,7 +34,7 @@
         <input type='submit' class='header__btn' value= <?=$auth ? 'Выйти' : 'Войти'?>>
     </form>
     <!-- имя пользователя и время входа -->
-    <p class='header__user'> <?php echo $login ? "$login-$authDate" : null ?> </p>
+    <p class='header__user'> <?= $login ? "$login-$authDate" : null ?> </p>
     <!-- заголовок -->
     <p class='header__title'> <img src="img/icon.png" alt="СПА-салон"> НА ЧИЛЕ</p>
     <!-- меню навигации -->
@@ -53,9 +53,9 @@
         <p class='visit-card__address'>Спа-Салон (г.Благовещенск, ул.Пролетарская, д.5)</p>
         <p class='visit-card__schedule'>Круглосуточно</p>
         <input type="button" class='btn btn-call' value="Позвонить">
-    </section>  
+    </section>
+      
     <?php
-    
         if($auth){ 
             // ***** индивидуальная скидка *****
             // при первом входе активируется индивидуальная скидка 

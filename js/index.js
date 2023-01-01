@@ -6,16 +6,15 @@ callBtn.addEventListener('mouseout', function(){this.value = 'Позвонить
 // ***** Формирование имени пользователя и времени входа *****
 let headerUser = document.querySelector('.header__user');
 let data = headerUser.textContent.split('-'); 
-headerUser.textContent = data.length==2 ? `Здравствуйте,${data[0]} (Время входа: ${getHoursAndMinutes(data[1])})` : 'Здравствуйте, Гость!';
+headerUser.textContent = data.length==2 ? `Здравствуйте,${data[0]} (Время входа: ${formatHoursAndMinutes(data[1])})` : 'Здравствуйте, Гость!';
 
-// ***** показ дней до ДР *****
+// ***** Отображение скидки у цен
 let birthdayDiscount = document.querySelector('.discount-birthday');
 data = birthdayDiscount.textContent.split('-');
 let birthday = data[0];
 let extCount = data[1];
-
-// ***** Отображение скидки у цен
 let prices = document.querySelectorAll('.price'); // цены
+
 if(birthday && extCount)
 {
     let leftDays =  formatTimeInterval(birthday-getDateNowInSeconds()).get('days');
@@ -37,21 +36,23 @@ data = document.querySelector('#uniqDiscountValue').textContent.split('-');
 let auth = data[0]; // авторизирован?
 let visits = data[1]; // посещения активным пользователем
 let endDiscountTime = data[2]; // конец скидки
+let nowTime = Math.floor(Date.now()/1000);
 
-console.log(auth==true, visits>0, (Date.now()/1000)<endDiscountTime);
-if(auth && visits>1 && (Date.now()/1000)<endDiscountTime){
-    let nowTime, leftDays;
+if(auth && visits>1 && nowTime<endDiscountTime){
+    let leftTime = formatTimeInterval(endDiscountTime-nowTime);
+    let countdown = `Для вас индивидуальное предложение! Спешите! Осталось ${leftTime.get('hours')}ч ${leftTime.get('minutes')}мин ${leftTime.get('seconds')}сек`;
+    uniqDiscount.textContent = countdown;
     uniqDiscount.style.display = 'flex';
     let timerID = setInterval(() => {
         nowTime = Math.floor(Date.now()/1000);
-        leftDays = formatTimeInterval(endDiscountTime-nowTime);
+        leftTime = formatTimeInterval(endDiscountTime-nowTime);
         if((endDiscountTime-nowTime) > 0){
-            text = `Для вас индивидуальное предложение! Спешите! Осталось ${leftDays.get('hours')}ч ${leftDays.get('minutes')}мин ${leftDays.get('seconds')}сек.`;
-            uniqDiscount.textContent = text;
+            countdown = `Для вас индивидуальное предложение! Спешите! Осталось ${leftTime.get('hours')}ч ${leftTime.get('minutes')}мин ${leftTime.get('seconds')}сек`;
+            uniqDiscount.textContent = countdown;
         }
         else{
             clearTimeout(timerID);
             uniqDiscount.style.display = 'none';
         }
-    }, 1000);
+    }, 500);
 }

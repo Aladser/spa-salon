@@ -1,5 +1,3 @@
-<?php session_start() ?>
-
 <section id='birthdayInputSection' class='modal modal_active'>
     <div class="modal__content">
         <button class="modal__close-button">x</button>
