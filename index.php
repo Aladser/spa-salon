@@ -54,8 +54,6 @@
         <p class='visit-card__schedule'>Круглосуточно</p>
         <input type="button" class='btn btn-call' value="Позвонить">
     </section>  
-    <p class='discount discount-uniq'></p>
-
     <?php
     
         if($auth){ 
@@ -63,36 +61,7 @@
             // при первом входе активируется индивидуальная скидка 
             if($_SESSION[$login]['visits'] == 1){
                 $_SESSION[$login]['endDiscount'] = time() + 86400; // время конца скидки
-            }
-            // показ индивидуальной скидки, если прошло меньше суток
-            // выводится при обновлении страницы после первой авторизации. Далее выводится сразу же после авторизации
-            else{
-                $pagesUpdates =  $_SESSION[$login]['visits']; // число обновлений страницы
-                $isDiscount = time()<$_SESSION[$login]['endDiscount']; // прошло < 24 часов?
-                    
-                if($pagesUpdates>0 && $isDiscount){
-    ?>                      
-                    <script type="text/javascript">
-                        let uniqDiscount = document.querySelector('.discount-uniq'); // контейнер индивид.скидки
-                        uniqDiscount.style.display = 'flex';
-
-                        let endDiscount = <?=$_SESSION[$login]['endDiscount']?>; // конец скидки
-                        let nowTime, leftDays;
-
-                        let timerID = setInterval(() => {
-                            nowTime = Math.floor(Date.now()/1000);
-                            leftDays = formatTimeInterval(endDiscount-nowTime);
-                            if((endDiscount-nowTime) > 0){
-                                text = `Для вас индивидуальное предложение! Спешите! Осталось ${leftDays.get('hours')}ч ${leftDays.get('minutes')}мин ${leftDays.get('seconds')}сек.`;
-                                uniqDiscount.textContent = text;
-                            }
-                            else clearTimeout(timerID);
-                        }, 1000);
-                    </script>
-    <?php       } else{ ?>
-                    <script type="text/javascript"> uniqDiscount.style.display = 'none'; </script>
-                <?php }    
-            }               
+            }              
             // ****  скидка в честь ДР *****
             // показ диалогового окна ввода даты
             // на числе $_SESSION[$login]['exit'] завязан вывод окна ввода даты
@@ -118,7 +87,9 @@
             }
         }         
     ?>
-
+    <!-- индивидуальная скидка -->
+    <p style='display:none' id='uniqDiscountValue'><?=$auth.'-'.$_SESSION[$login]['visits'].'-'.$_SESSION[$login]['endDiscount']?></p>
+    <p class='discount discount-uniq'></p>
     <!-- контейнер числа дней до ДР -->
     <?php
         $birthday = $_SESSION[$login]['birthday']??null;

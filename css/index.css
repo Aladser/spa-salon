@@ -36,6 +36,7 @@ a{text-decoration: none;}
 
     color: white;
     background-color: blueviolet;
+    font-size: 1.7vh;
 }
 .header__btn:hover{
     cursor: pointer;
