@@ -14,6 +14,14 @@ function getDateNowInSeconds(){
     now.setMinutes(0);
     now.setSeconds(0);
     now.setMilliseconds(0);
-    return Date.parse(now); 
+    return Math.floor(Date.parse(now)/1000); 
 }
-
+/** получить форматированные часы:минуты */
+function getHoursAndMinutes(time){
+    let date = new Date(time*1000);
+    let hours = date.getHours(); 
+    hours = hours<10 ? `0${hours}` : hours;
+    let minutes = date.getMinutes(); 
+    minutes = minutes<10 ? `0${minutes}` : minutes;
+    return `${hours}:${minutes}`;
+}
