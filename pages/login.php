@@ -13,7 +13,6 @@
 
         <?php
             session_start();
-            
             // вывод сообщения о неправильном логине или пароле
             $nouser = $_SESSION['nouser'] ?? null;
             $wrongPassword = $_SESSION['wrongpassword'] ?? null;
@@ -28,12 +27,12 @@
         <div class='form-row'>
             <label for="login-input" class='form-row__label'>Логин:</label>
             <!-- показ логина, если неправильный пароль -->
-            <input type='text' class='login-input' name='login' id='login-input' autocomplete='on' value='borzenko_ys'>
+            <input type='text' class='login-input' name='login' id='login-input' autocomplete='on' value='antonova_da'>
             <?php if($wrongPassword) unset($_SESSION['wrongpassword']) ?>
         </div>
         <div class='form-row'>
             <label for="password-input" class='form-row__label'>Пароль:</label>
-            <input type="password" class='password-input' name='password' id='password-input' autocomplete='on' value='borzenko_ys'>
+            <input type="password" class='password-input' name='password' id='password-input' autocomplete='on' value='antonova_da'>
         </div>
         <div class='form-row form-btn-row'>
             <input class='btn-submit' type="submit" value='Войти'>

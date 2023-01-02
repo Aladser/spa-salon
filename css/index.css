@@ -27,9 +27,17 @@ a{text-decoration: none;}
     width: 4vw;
     height: 100%;
 
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 
     border: none;
     border-right: 2px solid white;
@@ -52,9 +60,17 @@ a{text-decoration: none;}
     width: 20vw;
     height: 100%;
 
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 
     border-right: 2px solid white;
 }
@@ -66,9 +82,17 @@ a{text-decoration: none;}
     width: 15vw;
     height: 100%;
 
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 
 .header__menu{
@@ -84,17 +108,33 @@ a{text-decoration: none;}
     height: 100%;
     list-style: none;
 
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
     display: flex;
-    justify-content: right;
-    align-items: center;
+    -webkit-box-pack: right;
+        -ms-flex-pack: right;
+            justify-content: right;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 .header__menu li{
     width: 7vw;
     height: 97%;
 
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 
     border-left: 1px solid white;
 }
@@ -108,9 +148,17 @@ a{text-decoration: none;}
     width: 16.5vw;
     height: 15vh;
 
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 
     padding: 1rem;
     background-color: blueviolet;
@@ -119,7 +167,6 @@ a{text-decoration: none;}
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
-/* индивидуальная скидка */
 .discount-uniq{
     right: 0.1vw;
     display: none;
@@ -176,9 +223,13 @@ a{text-decoration: none;}
 
 .services-container{
     margin-top: 1rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-wrap: wrap;
-    justify-content:space-around;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-pack:distribute;
+        justify-content:space-around;
 }
 .services-container__title, .service__title{
     color: blueviolet;
@@ -197,9 +248,17 @@ a{text-decoration: none;}
     color: blueviolet;
     font-family: Arial, Helvetica, sans-serif;
     
+    display: -webkit-box;
+    
+    display: -ms-flexbox;
+    
     display: flex;
-    flex-direction: column;
-    justify-content:space-around;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-pack:distribute;
+        justify-content:space-around;
 }
 
 .service__info{

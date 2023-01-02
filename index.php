@@ -1,7 +1,6 @@
 <!DOCTYPE html><html lang="en">
 <?php
     session_start();
-    
     $auth = $_SESSION['auth'] ?? null; // авторизация
     $login = $_SESSION['login'] ?? null; // активный пользователь
     $authDate = $_SESSION['authTime'] ?? null;  // время авторизации
@@ -10,7 +9,6 @@
         $birthday =  $_SESSION[$login]['birthday'] ?? false; // ДР
         $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0; // число выходов
     }
-
     //var_dump($_SESSION);
 ?>
 
@@ -21,12 +19,11 @@
     <link rel="icon" href="img/icon.png">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/birthdaySendWindow.css">
     <title> СПА-салон «На Чиле»</title>
 </head>
 
 <body>
-    <script type='text/javascript' src='js/dateFunc.js'></script>
-
     <header class='header'>
     <!-- Кнопка входа/выхода -->
     <?php $action = $auth ? '../php_scriptes/exit.php' : '../pages/login.php' ?>
@@ -174,6 +171,7 @@
             <p>СПА Салон ООО "На чиле"</p>
     </footer>
 
+    <script type='text/javascript' src='js/dateFunc.js'></script>
     <script type='text/javascript' src='js/modalBirthday.js'></script>
     <script type='text/javascript' src='js/index.js'></script>
 </body>

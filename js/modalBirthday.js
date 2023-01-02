@@ -1,10 +1,7 @@
 let bithdayInputWindow = document.querySelector('#birthdayInputSection');
-let bithdayInput = document.querySelector('.modal__birthday');
-let sendBtn = document.querySelector('#send-btn');
-let closeBtn = document.querySelector('.modal__close-button');
+let bithdayInput = document.querySelector('.birthdaySendWindow__birthdayInput');
+let sendBtn = document.querySelector('.birthdaySendWindow__sendBtn');
+let closeBtn = document.querySelector('.birthdaySendWindow__closeBtn');
 
-// Закрытие модального окна ввода даты рождения на крестик
-if(closeBtn) closeBtn.addEventListener('click', () => bithdayInputWindow.className='modal');
-
-// разблокировка кнопки отправки при вводе даты
-if(bithdayInput) bithdayInput.addEventListener( 'input', () => sendBtn.disabled = false );
+if(closeBtn) closeBtn.addEventListener('click', () => bithdayInputWindow.className='modal'); // Закрытие модального окна
+if(bithdayInput) bithdayInput.addEventListener( 'input', () => sendBtn.disabled = false ); // разблокировка кнопки отправки при вводе даты
