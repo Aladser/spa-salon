@@ -14,8 +14,8 @@
             $_SESSION['authTime'] = time(); // время авторизации
         }     
         else{
-            $_SESSION['wrongpassword'] = true; // флаг неправильного пароля
             $_SESSION['loginClick'] = true;
+            $_SESSION['wrongpassword'] = true; // флаг неправильного пароля
         }
     } 
     else{
