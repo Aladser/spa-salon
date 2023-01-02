@@ -54,9 +54,10 @@
     </section>
       
     <?php
+        // окно входа
         if(isset($_SESSION['loginClick'])){
             unset($_SESSION['loginClick']);
-            include 'pages/loginWindow.php'; // окно входа
+            include 'pages/loginWindow.php';
         }
 
         if($auth){ 
@@ -80,7 +81,6 @@
                 $birthDate = explode('-', $_POST['birthday']);
                 $birthDay = $birthDate[2];
                 $birthMonth = $birthDate[1];
-
                 if($birthMonth>date('m')) $birthYear = date('Y');
                 elseif($birthMonth===date('m') && $birthDay>=date('d')) $birthYear = date('Y');
                 else $birthYear = date('Y')+1;          
@@ -92,8 +92,8 @@
     ?>
     <!-- индивидуальная скидка -->
     <p class='uniqDiscountValue'><?=$auth.'-'.$_SESSION[$login]['visits'].'-'.$_SESSION[$login]['endDiscount']?></p>
-    
     <p class='discount discount-uniq'></p>
+    
     <!-- контейнер числа дней до ДР -->
     <?php
         $birthday = $_SESSION[$login]['birthday']??null;
@@ -178,8 +178,8 @@
     </footer>
 
     <script type='text/javascript' src='js/dateFunc.js'></script>
-    <script type='text/javascript' src='js/modalBirthday.js'></script>
-    <script type='text/javascript' src='js/login.js'></script>
+    <script type='text/javascript' src='js/birthdayInputWindow.js'></script>
+    <script type='text/javascript' src='js/loginInputWindow.js'></script>
     <script type='text/javascript' src='js/index.js'></script>
 </body>
 </html>
