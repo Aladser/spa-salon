@@ -26,7 +26,7 @@
 <body>
     <header class='header'>
     <!-- Кнопка входа/выхода -->
-    <?php $action = $auth ? '../php_scriptes/exit.php' : '../pages/login.php' ?>
+     <?php $action = $auth ? '../pages/exit.php' : '../pages/login.php' ?>
     <form class='form-auth' method='POST' action= <?=$action?>>
         <input type='submit' class='header__btn' value= <?=$auth ? 'Выйти' : 'Войти'?>>
     </form>

@@ -8,8 +8,8 @@
     <title> СПА-салон: авторизация </title>
 </head>
 <body>
-    <section class='loginSection'><form method="POST" action='../php_scriptes/auth.php'>
-        <h3 class='loginSection__header'> Авторизация</h3>
+    <div class='loginWindow'><form method="POST" action='../scriptes/auth.php'>
+        <h3 class='loginWindow__header'> Авторизация</h3>
 
         <?php
             session_start();
@@ -17,27 +17,28 @@
             $nouser = $_SESSION['nouser'] ?? null;
             $wrongPassword = $_SESSION['wrongpassword'] ?? null;
             if($nouser){
-                echo "<div class='error'>Пользователь не существует</div>";
+                echo "<div class='loginWindow__error'>Пользователь не существует</div>";
                 unset($_SESSION['nouser']);
             }
             elseif($wrongPassword)
-                echo "<div class='error'>Неверный пароль</div>";      
+                echo "<div class='loginWindow__error'>Неверный пароль</div>";      
         ?>
 
-        <div class='form-row'>
-            <label for="login-input" class='form-row__label'>Логин:</label>
-            <!-- показ логина, если неправильный пароль -->
-            <input type='text' class='login-input' name='login' id='login-input' autocomplete='on' value='antonova_da'>
+        <div class='loginWindow__formRow'>
+            <label for="loginInput" class='loginWindow__label'>Логин:</label>
+            <input type='text' class='loginWindow__input' name='login' id='loginInput' autocomplete='on' value = <?= $wrongPassword || $nouser ? $_SESSION['login'] : 'antonova_da' ?> >
             <?php if($wrongPassword) unset($_SESSION['wrongpassword']) ?>
+        </div> 
+        <div class='loginWindow__formRow'>
+            <label for="password-input" class='loginWindow__label'>Пароль:</label>
+            <input type="password" class='loginWindow__input' name='password' id='password-input' autocomplete='on' value= <?= $wrongPassword ? '' : 'antonova_da' ?>>
         </div>
-        <div class='form-row'>
-            <label for="password-input" class='form-row__label'>Пароль:</label>
-            <input type="password" class='password-input' name='password' id='password-input' autocomplete='on' value='antonova_da'>
+        <div class='loginWindow__formRow loginWindow__btnRow'> 
+            <input type="submit" class='loginWindow__Btn' value='Войти'> 
+            <input type="button" class='loginWindow__Btn loginWindow__cancelBtn' value='Отмена'> 
         </div>
-        <div class='form-row form-btn-row'>
-            <input class='btn-submit' type="submit" value='Войти'>
-        </div>
-    </form></section>
+    </form></div>
+
     <script src="../js/login.js"></script>
 </body>
 </html>

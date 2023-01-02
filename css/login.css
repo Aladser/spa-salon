@@ -3,42 +3,49 @@
     padding: 0px;
 }
 
-.loginSection{
+.loginWindow{
     border: 1px dotted grey;
     width: 30%;
     margin: auto;
     margin-top: 30px;
     padding: 5px;
 }
-.loginSection__header{
+
+.loginWindow__header{
     padding-bottom: 1.5rem;
     text-align: center;
 }
 
-.form-row{
+.loginWindow__formRow{
     width: 50%;
     margin: auto;
     margin-bottom: 5px;
     display: flex;
 }
-.form-row__label{
-    width: 25%;
+
+.loginWindow__label{
+    width: 20%;
     text-align: left;
     padding: 5px;
 }
-.form-btn-row{
-    margin-top: 1rem;
-    padding: 0.3rem;
+.loginWindow__input{
+    width: 80%;
 }
 
-.btn-submit{
+.loginWindow__btnRow{
+    padding-top: 1vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;    
+}
+.loginWindow__Btn{
     background-color: white;
     border: 1px solid grey;
     width: 6.5rem;
     padding: 0.4rem;
 }
 
-.error{
+.loginWindow__error{
     text-align: center;
     color: red;
     margin-bottom: 1rem;
