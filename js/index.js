@@ -32,7 +32,7 @@ if(birthday && extCount)
 
 //***** индивидуальная скидка ******
 let uniqDiscount = document.querySelector('.discount-uniq');
-data = document.querySelector('#uniqDiscountValue').textContent.split('-');
+data = document.querySelector('.uniqDiscountValue').textContent.split('-');
 let auth = data[0]; // авторизирован?
 let visits = data[1]; // посещения активным пользователем
 let endDiscountTime = data[2]; // конец скидки

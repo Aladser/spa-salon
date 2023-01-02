@@ -1,8 +1,9 @@
 <?php
-    session_start(); 
-    $_SESSION['auth'] = null;
+    session_start();
+    unset($_SESSION['auth']); 
+    unset($_SESSION['authTime']);
     $login = $_SESSION['login'];
-    $_SESSION['login'] = null;
+    unset($_SESSION['login']);
     // подсчет числа выходов текущего пользователя
     $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0;
     $_SESSION[$login]['exit']++;

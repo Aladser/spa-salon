@@ -4,6 +4,7 @@
 }
 
 .loginWindow{
+    background-color: white;
     border: 1px dotted grey;
     width: 30%;
     margin: auto;

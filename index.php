@@ -6,10 +6,10 @@
     $authDate = $_SESSION['authTime'] ?? null;  // время авторизации
     if($auth){
         $_SESSION[$login]['visits']++; // число обновлений страницы активным пользователем
-        $birthday =  $_SESSION[$login]['birthday'] ?? false; // ДР
+        $birthday =  $_SESSION[$login]['birthday'] ?? null; // ДР
         $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0; // число выходов
     }
-    //var_dump($_SESSION);
+    // var_dump($_SESSION);
 ?>
 
 <head>
@@ -20,13 +20,14 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/birthdaySendWindow.css">
+    <link rel="stylesheet" href="css/login.css">
     <title> СПА-салон «На Чиле»</title>
 </head>
 
 <body>
     <header class='header'>
     <!-- Кнопка входа/выхода -->
-     <?php $action = $auth ? '../pages/exit.php' : '../pages/login.php' ?>
+     <?php $action = $auth ? '../scriptes/exit.php' : '../scriptes/loginButtonClick.php' ?>
     <form class='form-auth' method='POST' action= <?=$action?>>
         <input type='submit' class='header__btn' value= <?=$auth ? 'Выйти' : 'Войти'?>>
     </form>
@@ -53,6 +54,11 @@
     </section>
       
     <?php
+        if(isset($_SESSION['loginClick'])){
+            unset($_SESSION['loginClick']);
+            include 'pages/loginWindow.php'; // окно входа
+        }
+
         if($auth){ 
             // ***** индивидуальная скидка *****
             // при первом входе активируется индивидуальная скидка 
@@ -85,7 +91,7 @@
         }         
     ?>
     <!-- индивидуальная скидка -->
-    <p style='display:none' id='uniqDiscountValue'><?=$auth.'-'.$_SESSION[$login]['visits'].'-'.$_SESSION[$login]['endDiscount']?></p>
+    <p class='uniqDiscountValue'><?=$auth.'-'.$_SESSION[$login]['visits'].'-'.$_SESSION[$login]['endDiscount']?></p>
     
     <p class='discount discount-uniq'></p>
     <!-- контейнер числа дней до ДР -->
@@ -173,6 +179,7 @@
 
     <script type='text/javascript' src='js/dateFunc.js'></script>
     <script type='text/javascript' src='js/modalBirthday.js'></script>
+    <script type='text/javascript' src='js/login.js'></script>
     <script type='text/javascript' src='js/index.js'></script>
 </body>
 </html>
