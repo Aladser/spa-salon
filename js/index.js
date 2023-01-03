@@ -3,7 +3,6 @@
 /** модальное окно ввода даты рождения */ let birthdayInputWindow = document.querySelector('#birthdayInputSection');
  
 /** JSON от сервера */ const json = JSON.parse(document.querySelector('#jsonBuffer').textContent);
-
 const auth = json['auth']; // авторизация
 const login = json['login']; // логин
 const authTime = json['authtime']; // время авторизации
@@ -11,8 +10,6 @@ const birthday = parseInt(json['birthday']); // ДР
 const endDiscountTime = parseInt(json['endDiscount']); // конец суточной скидки
 const exitCount = parseInt(json['exit']); //** число выходов активного пользователя из личного кабинета */
 const visitCount = json['visit']; /** число обновлений страницы активным пользователем */
-
-console.log(json);
 
 /** кнопка входа-выхода в шапке главной страницы */ let headerBtn = document.querySelector('.header__btn');
 headerBtn.value = auth ? 'Выйти' : 'Войти';
@@ -28,9 +25,10 @@ document.querySelector('.header__user').textContent = auth ? `Здравству
 let birthdayDiscount = document.querySelector('.discount-birthday');
 let prices = document.querySelectorAll('.price'); // цены
 
-if(birthday!=0)
+let leftDays = birthday>0 ? formatTimeInterval(birthday-getDateNowInSeconds()).get('days') : -1;
+if(birthday>0 && (leftDays==0 || exitCount>0))
 {
-    let leftDays =  formatTimeInterval(birthday-getDateNowInSeconds()).get('days');
+    leftDays =  formatTimeInterval(birthday-getDateNowInSeconds()).get('days');
     text = leftDays!=0 ? `До вашего дня рождения дней: ${leftDays}` :  'О, у вас день рождения. Поздравляем! Сегодня дарим вам скидку 5% на все наши услуги'; 
     birthdayDiscount.textContent = text;
     birthdayDiscount.style.display = 'flex';
@@ -47,7 +45,7 @@ if(birthday!=0)
 let uniqDiscount = document.querySelector('.discount-uniq');
 let nowTime = Math.floor(Date.now()/1000);
 
-if(auth && nowTime<endDiscountTime && (visitCount>1&& !birthday || visitCount>2)){
+if(auth && nowTime<endDiscountTime && ((visitCount>1 && !birthday) || visitCount>2)){
     let leftTime = formatTimeInterval(endDiscountTime-nowTime);
     let countdown = `Для вас индивидуальное предложение! Спешите! Осталось ${leftTime.get('hours')}ч ${leftTime.get('minutes')}мин ${leftTime.get('seconds')}сек`;
     uniqDiscount.textContent = countdown;
