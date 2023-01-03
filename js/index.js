@@ -1,9 +1,11 @@
-const isNumber = (num) => typeof num === 'number' && !isNaN(num); // проверка на число
-let loginInputWindow = document.querySelector('#loginInputSection');  // окно аутентификации
-let headerBtn = document.querySelector('.header__btn'); // кнопка входа-выхода в шапке
-let exitCount; // число выходов активного пользователя из личного кабинета
-let auth; // авторизован?
-let data; // данные тегов
+/** проверка на число */ const isNumber = (num) => typeof num === 'number' && !isNaN(num);
+/** модальное окно аутентификации */ let loginInputWindow = document.querySelector('#loginInputSection');
+/** модальное окно ввода даты рождения */ let birthdayInputWindow = document.querySelector('#birthdayInputSection'); 
+/** кнопка входа-выхода в шапке главной страницы */ let headerBtn = document.querySelector('.header__btn');
+/** флаг авторизации */ let auth;
+let data = document.querySelector('#exitValue').textContent.split('-');
+/** число выходов активного пользователя из личного кабинета */ let exitCount = parseInt(data[0]);
+/** число обновлений страницы активным пользователем */ let visitCount = parseInt(data[1]);
 
 // ***** Формирование имени пользователя и времени входа *****
 let headerUser = document.querySelector('.header__user');
@@ -18,13 +20,6 @@ document.querySelector('.header__btn').addEventListener('click', function(){
         window.open("../scriptes/exit.php", "_self");
     this.value = this.value =='Войти' ? 'Выйти' : 'Войти'; 
 });
-
-// ***** Показ окна ввода даты рождения *****
-data = document.querySelector('#exitValue').textContent.split('-');
-exitCount = parseInt(data[0]); // число выходов активного пользователя из личного кабинета
-let visitCount = parseInt(data[1]); // // число обновлений страницы пользователем
-let birhdayInputWindow = document.querySelector('#birthdayInputSection');
-if(auth && exitCount==0 && visitCount==1) birhdayInputWindow.className = 'modal modal_active'; // показывает окно при первом входе в личный кабинет
 
 //***** Кнопка показа номера *****
 let callBtn = document.querySelector('.btn-call');
