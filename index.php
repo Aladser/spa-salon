@@ -10,7 +10,6 @@
     if($auth) $_SESSION[$login]['visit']++;
     $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0;
 
-    $json = [];
     $json['auth'] = $auth;
     $json['login'] = $login;
     $json['authtime'] = $_SESSION['authTime'] ?? 0; // время авторизации
