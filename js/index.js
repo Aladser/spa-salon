@@ -13,7 +13,7 @@ data = headerUser.textContent.split('-');
 auth = data.length==2 ? true : false;
 headerUser.textContent = auth ? `Здравствуйте,${data[0]} (Время входа: ${formatHoursAndMinutes(data[1])})` : 'Здравствуйте, Гость!';
 
-document.querySelector('.header__btn').addEventListener('click', function(){
+headerBtn.addEventListener('click', function(){
     if(this.value=='Войти') 
         loginInputWindow.className = 'modal modal_active';
     else 
@@ -48,14 +48,10 @@ if(isNumber(birthday) && isNumber(exitCount))
 
 //***** индивидуальная скидка ******
 let uniqDiscount = document.querySelector('.discount-uniq');
-data = uniqDiscount.textContent.split('-');
-//let auth = data[0]; // авторизирован?
-let visits = data[1]; // посещения активным пользователем
-let endDiscountTime = data[2]; // конец скидки
-birthday = data[3]; // дата рождения
+let endDiscountTime = parseInt(uniqDiscount.textContent);
 let nowTime = Math.floor(Date.now()/1000);
 
-if(auth && nowTime<endDiscountTime && (visits>1&&!birthday || visits>2)){
+if(auth && nowTime<endDiscountTime && (visitCount>1&& !birthday || visitCount>2)){
     let leftTime = formatTimeInterval(endDiscountTime-nowTime);
     let countdown = `Для вас индивидуальное предложение! Спешите! Осталось ${leftTime.get('hours')}ч ${leftTime.get('minutes')}мин ${leftTime.get('seconds')}сек`;
     uniqDiscount.textContent = countdown;

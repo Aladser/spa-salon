@@ -76,7 +76,7 @@
         }         
     ?>
     <!-- индивидуальная скидка -->
-    <p class='discount discount-uniq'><?=$auth.'-'.$_SESSION[$login]['visit'].'-'.$_SESSION[$login]['endDiscount'].'-'.$birthday?></p>
+    <p class='discount discount-uniq'><?=$_SESSION[$login]['endDiscount']?></p>
     <!-- контейнер числа дней до ДР -->
     <p class='discount discount-birthday'><?=$birthday?></p>
 
