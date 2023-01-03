@@ -11,14 +11,6 @@ data = headerUser.textContent.split('-');
 auth = data.length==2 ? true : false;
 headerUser.textContent = auth ? `Здравствуйте,${data[0]} (Время входа: ${formatHoursAndMinutes(data[1])})` : 'Здравствуйте, Гость!';
 
-// ***** вывод ошибки ввода логина или пароля *****
-let errorContainer = document.querySelector('.loginWindow__error');
-let errorMessage = errorContainer.textContent.split('-');
-if(errorMessage.includes('Пользователя не существует') || errorMessage.includes('Неверный пароль')){
-    loginInputWindow.className = 'modal modal_active';
-}
-errorContainer.textContent = errorContainer.textContent.replace('-', '');
-
 document.querySelector('.header__btn').addEventListener('click', function(){
     if(this.value=='Войти') 
         loginInputWindow.className = 'modal modal_active';

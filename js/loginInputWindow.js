@@ -1,3 +1,12 @@
+// ***** вывод ошибки ввода логина или пароля *****
+let errorContainer = document.querySelector('.loginWindow__error');
+let errorMessage = errorContainer.textContent.split('-');
+if(errorMessage.includes('Пользователя не существует') || errorMessage.includes('Неверный пароль')){
+    loginInputWindow.className = 'modal modal_active';
+}
+errorContainer.textContent = errorContainer.textContent.replace('-', '');
+
+// кнопка отмены
 let cancelBtn = document.querySelector('.loginWindow__cancelBtn');
 if(cancelBtn) cancelBtn.addEventListener('click', () => {
     document.querySelector('#loginInputSection').className = 'modal';
