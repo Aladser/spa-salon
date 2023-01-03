@@ -9,6 +9,12 @@
     $exitCount = isset($_SESSION[$login]['exit']) ? $_SESSION[$login]['exit'] : 0;  // число обновлений страниц пользователем
     $birthday =  $_SESSION[$login]['birthday'] ?? null; // ДР
     if($auth) $_SESSION[$login]['visit']++; // число обновлений страницы активным пользователем
+    $authTime = $_SESSION['authTime'] ?? null; // время авторизации
+
+    $json = [];
+    $json['auth'] = $auth;
+    $json['login'] = $login;
+    $json['authtime'] = $authTime;
 
     // var_dump($_SESSION);
 ?>
@@ -28,7 +34,7 @@
 <body>
     <header class='header'>
     <!-- Кнопка входа/выхода -->
-    <input type='button' class='header__btn' value=<?=$auth?'Выйти':'Войти'?>>
+    <input type='button' class='header__btn'>
     <!-- имя пользователя и время входа -->
     <?php $authTime = $_SESSION['authTime'] ?? null;  // время авторизации ?>
     <p class='header__user'> <?=$auth?"$login-$authTime":null?> </p>
@@ -162,6 +168,7 @@
         unset($_SESSION['nouser']);
         unset($_SESSION['password']);
     ?>
+    <p style='display:none' id='jsonBuffer'><?= json_encode($json) ?></p>
     <script type='text/javascript' src='js/dateFunc.js'></script>
     <script type='text/javascript' src='js/index.js'></script>
     <script type='text/javascript' src='js/loginInputWindow.js'></script>

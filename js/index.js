@@ -1,30 +1,28 @@
 /** проверка на число */ const isNumber = (num) => typeof num === 'number' && !isNaN(num);
 /** модальное окно аутентификации */ let loginInputWindow = document.querySelector('#loginInputSection');
-/** модальное окно ввода даты рождения */ let birthdayInputWindow = document.querySelector('#birthdayInputSection'); 
-/** кнопка входа-выхода в шапке главной страницы */ let headerBtn = document.querySelector('.header__btn');
-/** флаг авторизации */ let auth;
+/** модальное окно ввода даты рождения */ let birthdayInputWindow = document.querySelector('#birthdayInputSection');
+ 
+/** JSON от сервера */ const json = JSON.parse(document.querySelector('#jsonBuffer').textContent);
+console.log(json);
+const auth = json['auth']; // авторизация
+const login = json['login']; // логин
+const authTime = json['authtime']; // время авторизации
+
 let data = document.querySelector('#exitValue').textContent.split('-');
 /** число выходов активного пользователя из личного кабинета */ let exitCount = parseInt(data[0]);
 /** число обновлений страницы активным пользователем */ let visitCount = parseInt(data[1]);
 
-// ***** Формирование имени пользователя и времени входа *****
-let headerUser = document.querySelector('.header__user');
-data = headerUser.textContent.split('-'); 
-auth = data.length==2 ? true : false;
-headerUser.textContent = auth ? `Здравствуйте,${data[0]} (Время входа: ${formatHoursAndMinutes(data[1])})` : 'Здравствуйте, Гость!';
-
+/** кнопка входа-выхода в шапке главной страницы */ let headerBtn = document.querySelector('.header__btn');
+headerBtn.value = auth ? 'Выйти' : 'Войти';
 headerBtn.addEventListener('click', function(){
     if(this.value=='Войти') 
         loginInputWindow.className = 'modal modal_active';
     else 
         window.open("../scriptes/exit.php", "_self");
-    this.value = this.value =='Войти' ? 'Выйти' : 'Войти'; 
 });
 
-//***** Кнопка показа номера *****
-let callBtn = document.querySelector('.btn-call');
-callBtn.addEventListener('mouseover', function(){this.value = '8 (421) 299-99-99';});
-callBtn.addEventListener('mouseout', function(){this.value = 'Позвонить';});
+// ***** Формирование имени пользователя и времени входа *****
+document.querySelector('.header__user').textContent = auth ? `Здравствуйте,${login} (Время входа: ${formatHoursAndMinutes(authTime)})` : 'Здравствуйте, Гость!';
 
 // ***** Отображение счетчика числа дней до ДР
 let birthdayDiscount = document.querySelector('.discount-birthday');
@@ -70,3 +68,7 @@ if(auth && nowTime<endDiscountTime && (visitCount>1&& !birthday || visitCount>2)
     }, 500);
 }
 
+//***** Кнопка показа номера *****
+let callBtn = document.querySelector('.btn-call');
+callBtn.addEventListener('mouseover', function(){this.value = '8 (421) 299-99-99';});
+callBtn.addEventListener('mouseout', function(){this.value = 'Позвонить';});
