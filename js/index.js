@@ -3,22 +3,22 @@
 /** модальное окно ввода даты рождения */ let birthdayInputWindow = document.querySelector('#birthdayInputSection');
  
 /** JSON от сервера */ const json = JSON.parse(document.querySelector('#jsonBuffer').textContent);
-console.log(json);
+
 const auth = json['auth']; // авторизация
 const login = json['login']; // логин
 const authTime = json['authtime']; // время авторизации
+const birthday = parseInt(json['birthday']); // ДР
+const endDiscountTime = parseInt(json['endDiscount']); // конец суточной скидки
+const exitCount = parseInt(json['exit']); //** число выходов активного пользователя из личного кабинета */
+const visitCount = json['visit']; /** число обновлений страницы активным пользователем */
 
-let data = document.querySelector('#exitValue').textContent.split('-');
-/** число выходов активного пользователя из личного кабинета */ let exitCount = parseInt(data[0]);
-/** число обновлений страницы активным пользователем */ let visitCount = parseInt(data[1]);
+console.log(json);
 
 /** кнопка входа-выхода в шапке главной страницы */ let headerBtn = document.querySelector('.header__btn');
 headerBtn.value = auth ? 'Выйти' : 'Войти';
 headerBtn.addEventListener('click', function(){
-    if(this.value=='Войти') 
-        loginInputWindow.className = 'modal modal_active';
-    else 
-        window.open("../scriptes/exit.php", "_self");
+    if(this.value=='Войти') loginInputWindow.className = 'modal modal_active';
+    else window.open("../scriptes/exit.php", "_self");
 });
 
 // ***** Формирование имени пользователя и времени входа *****
@@ -26,10 +26,9 @@ document.querySelector('.header__user').textContent = auth ? `Здравству
 
 // ***** Отображение счетчика числа дней до ДР
 let birthdayDiscount = document.querySelector('.discount-birthday');
-let birthday = parseInt(birthdayDiscount.textContent);
 let prices = document.querySelectorAll('.price'); // цены
 
-if(isNumber(birthday) && isNumber(exitCount))
+if(birthday!=0)
 {
     let leftDays =  formatTimeInterval(birthday-getDateNowInSeconds()).get('days');
     text = leftDays!=0 ? `До вашего дня рождения дней: ${leftDays}` :  'О, у вас день рождения. Поздравляем! Сегодня дарим вам скидку 5% на все наши услуги'; 
@@ -46,7 +45,6 @@ if(isNumber(birthday) && isNumber(exitCount))
 
 //***** индивидуальная скидка ******
 let uniqDiscount = document.querySelector('.discount-uniq');
-let endDiscountTime = parseInt(uniqDiscount.textContent);
 let nowTime = Math.floor(Date.now()/1000);
 
 if(auth && nowTime<endDiscountTime && (visitCount>1&& !birthday || visitCount>2)){

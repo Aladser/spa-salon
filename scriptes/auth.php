@@ -10,7 +10,6 @@
     if(existsUser($login)){
         if(checkPassword($login, $password)){
             $_SESSION['auth'] = true; // флаг аутентицикации
-            $_SESSION[$login]['visit'] = $_SESSION[$login]['visit'] ?? 0; // число посещений сайта(index.php) текущего пользователя
             $_SESSION['authTime'] = time(); // время авторизации
         }     
         else{

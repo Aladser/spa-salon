@@ -6,15 +6,17 @@
     $wrongPassword = isset($_SESSION['wrongpassword']) ? 'Неверный пароль' : null;
 
     $login = $_SESSION['login'] ?? null; // активный пользователь
-    $exitCount = isset($_SESSION[$login]['exit']) ? $_SESSION[$login]['exit'] : 0;  // число обновлений страниц пользователем
-    $birthday =  $_SESSION[$login]['birthday'] ?? null; // ДР
-    if($auth) $_SESSION[$login]['visit']++; // число обновлений страницы активным пользователем
-    $authTime = $_SESSION['authTime'] ?? null; // время авторизации
+    $_SESSION[$login]['visit'] = $_SESSION[$login]['visit'] ?? 0; // число обновлений страницы активным пользователем
+    if($auth) $_SESSION[$login]['visit']++;
+    $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0;
 
     $json = [];
     $json['auth'] = $auth;
     $json['login'] = $login;
-    $json['authtime'] = $authTime;
+    $json['authtime'] = $_SESSION['authTime'] ?? 0; // время авторизации
+    $json['birthday'] = $_SESSION[$login]['birthday'] ?? 0;
+    $json['exit'] = $_SESSION[$login]['exit'];
+    $json['visit'] =  $_SESSION[$login]['visit'];
 
     // var_dump($_SESSION);
 ?>
@@ -36,7 +38,7 @@
     <!-- Кнопка входа/выхода -->
     <input type='button' class='header__btn'>
     <!-- имя пользователя и время входа -->
-    <p class='header__user'> </p>
+    <p class='header__user'></p>
     <!-- заголовок -->
     <p class='header__title'> <img src="img/icon.png" alt="СПА-салон"> НА ЧИЛЕ</p>
     <!-- меню навигации -->
@@ -56,13 +58,19 @@
         <p class='visit-card__schedule'>Круглосуточно</p>
         <input type="button" class='btn btn-call' value="Позвонить">
     </section>
+    <!-- индивидуальная скидка -->
+    <p class='discount discount-uniq'></p>
+    <!-- контейнер числа дней до ДР -->
+    <p class='discount discount-birthday'></p>
       
     <?php
         include 'pages/loginWindow.php'; // модальное окно входа
         include 'pages/birthdayInputWindow.php';  // модальное окно ввода ДР
+
         if($auth){ 
             // при первом входе активируется индивидуальная скидка 
-            if($_SESSION[$login]['visit'] == 1) $_SESSION[$login]['endDiscount'] = time() + 86400; // время конца скидки             
+            if($_SESSION[$login]['visit'] == 1) $_SESSION[$login]['endDiscount'] = time() + 86400; // время конца скидки
+            $json['endDiscount'] = $_SESSION[$login]['endDiscount'];             
             // отлов формы ввода ДР
             if (isset($_POST['birthday'])){
                 $_SESSION[$login]['visit']--; // не учитывается редирект
@@ -80,10 +88,7 @@
             }
         }         
     ?>
-    <!-- индивидуальная скидка -->
-    <p class='discount discount-uniq'><?=$_SESSION[$login]['endDiscount']?></p>
-    <!-- контейнер числа дней до ДР -->
-    <p class='discount discount-birthday'><?=$birthday?></p>
+
 
     <section class='container'>
         <h2 class='services-container__title'>Услуги</h2>
@@ -161,13 +166,13 @@
             <p>СПА Салон ООО "На чиле"</p>
     </footer>
 
-    <?php $visitCount = $_SESSION[$login]['visit'] ?? null ?>
-    <p style='display:none' id='exitValue'> <?="$exitCount-$visitCount"?> </p>
     <?php
         unset($_SESSION['nouser']);
         unset($_SESSION['password']);
     ?>
-    <p style='display:none' id='jsonBuffer'><?= json_encode($json) ?></p>
+    
+    <p style='display:none' id='jsonBuffer'><?=json_encode($json)?></p>
+
     <script type='text/javascript' src='js/dateFunc.js'></script>
     <script type='text/javascript' src='js/index.js'></script>
     <script type='text/javascript' src='js/loginInputWindow.js'></script>
