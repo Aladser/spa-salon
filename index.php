@@ -58,10 +58,10 @@
         <p class='visit-card__schedule'>Круглосуточно</p>
         <input type="button" class='btn btn-call' value="Позвонить">
     </section>
-    <!-- индивидуальная скидка -->
-    <p class='discount discount-uniq'></p>
     <!-- контейнер числа дней до ДР -->
-    <p class='discount discount-birthday'></p>
+    <p class='discount discountBirthday'></p>
+    <!-- индивидуальная скидка -->
+    <p class='discount discountUniq'></p>
       
     <?php
         include 'pages/loginWindow.php'; // модальное окно входа

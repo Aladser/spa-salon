@@ -167,11 +167,9 @@ a{text-decoration: none;}
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
-.discount-uniq{
+.discountBirthday{display: none;}
+.discountUniq{
     right: 0.1vw;
-    display: none;
-}
-.discount-birthday{
     display: none;
 }
 

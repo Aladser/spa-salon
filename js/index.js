@@ -22,7 +22,7 @@ headerBtn.addEventListener('click', function(){
 document.querySelector('.header__user').textContent = auth ? `Здравствуйте,${login} (Время входа: ${formatHoursAndMinutes(authTime)})` : 'Здравствуйте, Гость!';
 
 // ***** Отображение счетчика числа дней до ДР
-let birthdayDiscount = document.querySelector('.discount-birthday');
+let birthdayDiscount = document.querySelector('.discountBirthday');
 let prices = document.querySelectorAll('.price'); // цены
 
 let leftDays = birthday>0 ? formatTimeInterval(birthday-getDateNowInSeconds()).get('days') : -1;
@@ -42,7 +42,7 @@ if(birthday>0 && (leftDays==0 || exitCount>0))
 }
 
 //***** индивидуальная скидка ******
-let uniqDiscount = document.querySelector('.discount-uniq');
+let uniqDiscount = document.querySelector('.discountUniq');
 let nowTime = Math.floor(Date.now()/1000);
 
 if(auth && nowTime<endDiscountTime && ((visitCount>1 && !birthday) || visitCount>2)){
