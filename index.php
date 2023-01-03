@@ -2,13 +2,14 @@
 <?php
     session_start();
     $auth = $_SESSION['auth'] ?? null; // авторизация
+    $nouser = isset($_SESSION['nouser']) ? 'Пользователя не существует' : null;
+    $wrongPassword = isset($_SESSION['wrongpassword']) ? 'Неверный пароль' : null;
+
     $login = $_SESSION['login'] ?? null; // активный пользователь
-    $authDate = $_SESSION['authTime'] ?? null;  // время авторизации
-    if($auth){
-        $_SESSION[$login]['visits']++; // число обновлений страницы активным пользователем
-        $birthday =  $_SESSION[$login]['birthday'] ?? null; // ДР
-        $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0; // число выходов
-    }
+    $exitCount = isset($_SESSION[$login]['exit']) ? $_SESSION[$login]['exit'] : 0;  // число обновлений страниц пользователем
+    $birthday =  $_SESSION[$login]['birthday'] ?? null; // ДР
+    if($auth) $_SESSION[$login]['visit']++; // число обновлений страницы активным пользователем
+
     // var_dump($_SESSION);
 ?>
 
@@ -27,12 +28,10 @@
 <body>
     <header class='header'>
     <!-- Кнопка входа/выхода -->
-     <?php $action = $auth ? '../scriptes/exit.php' : '../scriptes/loginButtonClick.php' ?>
-    <form class='form-auth' method='POST' action= <?=$action?>>
-        <input type='submit' class='header__btn' value= <?=$auth ? 'Выйти' : 'Войти'?>>
-    </form>
+    <input type='button' class='header__btn' value=<?=$auth?'Выйти':'Войти'?>>
     <!-- имя пользователя и время входа -->
-    <p class='header__user'> <?= $login ? "$login-$authDate" : null ?> </p>
+    <?php $authTime = $_SESSION['authTime'] ?? null;  // время авторизации ?>
+    <p class='header__user'> <?=$auth?"$login-$authTime":null?> </p>
     <!-- заголовок -->
     <p class='header__title'> <img src="img/icon.png" alt="СПА-салон"> НА ЧИЛЕ</p>
     <!-- меню навигации -->
@@ -54,28 +53,14 @@
     </section>
       
     <?php
-        // окно входа
-        if(isset($_SESSION['loginClick'])){
-            unset($_SESSION['loginClick']);
-            include 'pages/loginWindow.php';
-        }
-
+        include 'pages/loginWindow.php'; // модальное окно входа
+        include 'pages/birthdayInputWindow.php';  // модальное окно ввода ДР
         if($auth){ 
-            // ***** индивидуальная скидка *****
             // при первом входе активируется индивидуальная скидка 
-            if($_SESSION[$login]['visits'] == 1){
-                $_SESSION[$login]['endDiscount'] = time() + 86400; // время конца скидки
-            }              
-            // ****  скидка в честь ДР *****
-            // показ диалогового окна ввода даты
-            // на числе $_SESSION[$login]['exit'] завязан вывод окна ввода даты
-            if( $_SESSION[$login]['exit']==0){
-                $_SESSION[$login]['exit']++;
-                include 'pages/birthdayInputWindow.php';
-            }
+            if($_SESSION[$login]['visit'] == 1) $_SESSION[$login]['endDiscount'] = time() + 86400; // время конца скидки             
             // отлов формы ввода ДР
             if (isset($_POST['birthday'])){
-                $_SESSION[$login]['visits']-=2; // не учитывается редирект
+                $_SESSION[$login]['visit']--; // не учитывается редирект
                 
                 // формирование даты ДР для подсчета числа дней до него
                 $birthDate = explode('-', $_POST['birthday']);
@@ -91,15 +76,9 @@
         }         
     ?>
     <!-- индивидуальная скидка -->
-    <p class='uniqDiscountValue'><?=$auth.'-'.$_SESSION[$login]['visits'].'-'.$_SESSION[$login]['endDiscount']?></p>
-    <p class='discount discount-uniq'></p>
-    
+    <p class='discount discount-uniq'><?=$auth.'-'.$_SESSION[$login]['visit'].'-'.$_SESSION[$login]['endDiscount'].'-'.$birthday?></p>
     <!-- контейнер числа дней до ДР -->
-    <?php
-        $birthday = $_SESSION[$login]['birthday']??null;
-        $exit = $_SESSION[$login]['exit']??null;
-    ?>
-    <p class='discount discount-birthday'><?= $birthday.'-'.$exit ?></p>
+    <p class='discount discount-birthday'><?=$birthday?></p>
 
     <section class='container'>
         <h2 class='services-container__title'>Услуги</h2>
@@ -177,6 +156,12 @@
             <p>СПА Салон ООО "На чиле"</p>
     </footer>
 
+    <?php $visitCount = $_SESSION[$login]['visit'] ?? null ?>
+    <p style='display:none' id='exitValue'> <?="$exitCount-$visitCount"?> </p>
+    <?php
+        unset($_SESSION['nouser']);
+        unset($_SESSION['password']);
+    ?>
     <script type='text/javascript' src='js/dateFunc.js'></script>
     <script type='text/javascript' src='js/birthdayInputWindow.js'></script>
     <script type='text/javascript' src='js/loginInputWindow.js'></script>

@@ -5,6 +5,7 @@
     margin: auto;
     margin-top: 30px;
     padding: 5px;
+    height: 21vh;
 }
 
 .loginWindow__header{
@@ -29,10 +30,10 @@
 }
 
 .loginWindow__btnRow{
-    padding-top: 1vh;
+    padding: 1vh 0;
     display: flex;
     justify-content: space-around;
-    align-items: center;    
+    align-items: center;
 }
 .loginWindow__Btn{
     background-color: white;
@@ -42,7 +43,7 @@
 }
 
 .loginWindow__error{
+    margin-top: 1vh;
     text-align: center;
     color: red;
-    margin-bottom: 1rem;
 }

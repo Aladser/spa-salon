@@ -1,4 +1,4 @@
-<section id='birthdayInputSection' class='modal modal_active'>
+<section id='birthdayInputSection' class='modal'>
     <div class="birthdaySendWindow">
         <button class="birthdaySendWindow__closeBtn">x</button>
         <h1 class="birthdaySendWindow__title">Введите вашу дату рождения</h1>

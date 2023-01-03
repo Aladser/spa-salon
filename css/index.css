@@ -171,10 +171,9 @@ a{text-decoration: none;}
     right: 0.1vw;
     display: none;
 }
-.uniqDiscountValue{
+.discount-birthday{
     display: none;
 }
-.discount-birthday{display: none;}
 
 
 /* общий контейнер для контента */
