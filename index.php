@@ -36,8 +36,7 @@
     <!-- Кнопка входа/выхода -->
     <input type='button' class='header__btn'>
     <!-- имя пользователя и время входа -->
-    <?php $authTime = $_SESSION['authTime'] ?? null;  // время авторизации ?>
-    <p class='header__user'> <?=$auth?"$login-$authTime":null?> </p>
+    <p class='header__user'> </p>
     <!-- заголовок -->
     <p class='header__title'> <img src="img/icon.png" alt="СПА-салон"> НА ЧИЛЕ</p>
     <!-- меню навигации -->
