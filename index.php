@@ -164,7 +164,7 @@
     ?>
     <script type='text/javascript' src='js/dateFunc.js'></script>
     <script type='text/javascript' src='js/index.js'></script>
-    <script type='text/javascript' src='js/birthdayInputWindow.js'></script>
     <script type='text/javascript' src='js/loginInputWindow.js'></script>
+    <script type='text/javascript' src='js/birthdayInputWindow.js'></script>
 </body>
 </html>
