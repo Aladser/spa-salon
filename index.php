@@ -171,7 +171,7 @@
         unset($_SESSION['password']);
     ?>
     
-    <p style='display:none' id='jsonBuffer'><?=json_encode($json)?></p>
+    <div id="data-php" data-json=<?=json_encode($json)?>></div>
 
     <script type='text/javascript' src='js/dateFunc.js'></script>
     <script type='text/javascript' src='js/index.js'></script>

@@ -2,7 +2,7 @@
 /** модальное окно аутентификации */ let loginInputWindow = document.querySelector('#loginInputSection');
 /** модальное окно ввода даты рождения */ let birthdayInputWindow = document.querySelector('#birthdayInputSection');
  
-/** JSON от сервера */ const json = JSON.parse(document.querySelector('#jsonBuffer').textContent);
+/** JSON от сервера */ const json = JSON.parse(document.querySelector('#data-php').getAttribute('data-json'));
 const auth = json['auth']; // авторизация
 const login = json['login']; // логин
 const authTime = json['authtime']; // время авторизации
