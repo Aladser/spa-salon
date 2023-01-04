@@ -11,8 +11,8 @@ const endDiscountTime = parseInt(json['endDiscount']); // конец суточ�
 const exitCount = parseInt(json['exit']); //** число выходов активного пользователя из личного кабинета */
 const visitCount = json['visit']; /** число обновлений страницы активным пользователем */
 
-/** кнопка входа-выхода в шапке главной страницы */ let headerBtn = document.querySelector('.header__btn');
-headerBtn.value = auth ? 'Выйти' : 'Войти';
+// кнопка входа-выхода в шапке главной страницы
+let headerBtn = document.querySelector('.header__btn');
 headerBtn.addEventListener('click', function(){
     if(this.value=='Войти') loginInputWindow.className = 'modal modal_active';
     else window.open("../scriptes/exit.php", "_self");
@@ -29,6 +29,10 @@ let leftDays = birthday>0 ? formatTimeInterval(birthday-getDateNowInSeconds()).g
 if(birthday>0 && (leftDays==0 || exitCount>0))
 {
     leftDays =  formatTimeInterval(birthday-getDateNowInSeconds()).get('days');
+    if(leftDays == -1){
+        let year = new Date().getFullYear();
+        leftDays = year%4==0 || year%100==0 && year%400==0 ? 365 : 364; 
+    }
     text = leftDays!=0 ? `До вашего дня рождения дней: ${leftDays}` :  'О, у вас день рождения. Поздравляем! Сегодня дарим вам скидку 5% на все наши услуги'; 
     birthdayDiscount.textContent = text;
     birthdayDiscount.style.display = 'flex';

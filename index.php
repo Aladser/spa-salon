@@ -16,7 +16,6 @@
     $json['birthday'] = $_SESSION[$login]['birthday'] ?? 0;
     $json['exit'] = $_SESSION[$login]['exit'];
     $json['visit'] =  $_SESSION[$login]['visit'];
-
     // var_dump($_SESSION);
 ?>
 
@@ -35,7 +34,7 @@
 <body>
     <header class='header'>
     <!-- Кнопка входа/выхода -->
-    <input type='button' class='header__btn'>
+    <input type='button' class='header__btn' value=<?=$auth?'Выйти':'Войти'?>>
     <!-- имя пользователя и время входа -->
     <p class='header__user'></p>
     <!-- заголовок -->
