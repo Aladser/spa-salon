@@ -18,8 +18,8 @@ headerBtn.addEventListener('click', function(){
     else window.open("../scriptes/exit.php", "_self");
 });
 
-// ***** Формирование имени пользователя и времени входа *****
-document.querySelector('.header__user').textContent = auth ? `Здравствуйте,${login} (Время входа: ${formatHoursAndMinutes(authTime)})` : 'Здравствуйте, Гость!';
+// ***** Формирование имени пользователя и местного времени входа *****
+document.querySelector('.header__user').textContent = auth ? `Здравствуйте,${login} (Время входа: ${getLocalHoursAndMinutes(authTime)})` : 'Здравствуйте, Гость!';
 
 // ***** Отображение счетчика числа дней до ДР
 let birthdayDiscount = document.querySelector('.discountBirthday');

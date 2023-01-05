@@ -7,8 +7,8 @@ function formatTimeInterval(time){
     formatInterval.set('seconds', parseInt(Math.floor(time%86400%3600%60)));
     return formatInterval;
 }
-/** получить форматированные часы:минуты */
-function formatHoursAndMinutes(time){
+/** получить местное время (часы:минуты) */
+function getLocalHoursAndMinutes(time){
     let date = new Date(time*1000);
     let hours = date.getHours(); 
     hours = hours<10 ? `0${hours}` : hours;
