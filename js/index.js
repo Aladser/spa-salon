@@ -1,4 +1,3 @@
-/** проверка на число */ const isNumber = (num) => typeof num === 'number' && !isNaN(num);
 /** модальное окно аутентификации */ let loginInputWindow = document.querySelector('#loginInputSection');
 /** модальное окно ввода даты рождения */ let birthdayInputWindow = document.querySelector('#birthdayInputSection');
  
@@ -12,10 +11,10 @@ const exitCount = parseInt(json['exit']); //** число выходов акт�
 const visitCount = json['visit']; /** число обновлений страницы активным пользователем */
 
 // кнопка входа-выхода в шапке главной страницы
-document.querySelector('.header__btn').addEventListener('click', function(){
+document.querySelector('.header__btn').onclick = function(){
     if(this.value=='Войти') loginInputWindow.className = 'modal modal_active';
     else window.open("../scriptes/exit.php", "_self");
-});
+};
 
 // ***** Формирование имени пользователя и местного времени входа *****
 document.querySelector('.header__user').textContent = auth ? `Здравствуйте,${login} (Время входа: ${getLocalHoursAndMinutes(authTime)})` : 'Здравствуйте, Гость!';
@@ -62,5 +61,5 @@ if(auth && nowTime<endDiscountTime && ((visitCount>1 && !birthday) || visitCount
 
 //***** Кнопка показа номера *****
 let callBtn = document.querySelector('.btn-call');
-callBtn.addEventListener('mouseover', function(){this.value = '8 (421) 299-99-99';});
-callBtn.addEventListener('mouseout', function(){this.value = 'Позвонить';});
+callBtn.onmouseover = function() {this.value = '8 (421) 299-99-99';};
+callBtn.onmouseout = function(){this.value = 'Позвонить';};
