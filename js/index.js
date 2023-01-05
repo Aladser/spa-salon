@@ -12,8 +12,7 @@ const exitCount = parseInt(json['exit']); //** число выходов акт�
 const visitCount = json['visit']; /** число обновлений страницы активным пользователем */
 
 // кнопка входа-выхода в шапке главной страницы
-let headerBtn = document.querySelector('.header__btn');
-headerBtn.addEventListener('click', function(){
+document.querySelector('.header__btn').addEventListener('click', function(){
     if(this.value=='Войти') loginInputWindow.className = 'modal modal_active';
     else window.open("../scriptes/exit.php", "_self");
 });
@@ -23,22 +22,15 @@ document.querySelector('.header__user').textContent = auth ? `Здравству
 
 // ***** Отображение счетчика числа дней до ДР
 let birthdayDiscount = document.querySelector('.discountBirthday');
-let prices = document.querySelectorAll('.price'); // цены
-
 let leftDays = birthday>0 ? formatTimeInterval(birthday-getDateNowInSeconds()).get('days') : -1;
 if(birthday>0 && (leftDays==0 || exitCount>0))
 {
-    leftDays =  formatTimeInterval(birthday-getDateNowInSeconds()).get('days');
-    if(leftDays == -1){
-        let year = new Date().getFullYear();
-        leftDays = year%4==0 || year%100==0 && year%400==0 ? 365 : 364; 
-    }
     text = leftDays!=0 ? `До вашего дня рождения дней: ${leftDays}` :  'О, у вас день рождения. Поздравляем! Сегодня дарим вам скидку 5% на все наши услуги'; 
     birthdayDiscount.textContent = text;
     birthdayDiscount.style.display = 'flex';
     // если др сегодня
     if(leftDays == 0){
-        prices.forEach( price => {
+        document.querySelectorAll('.price').forEach( price => {
             price.className = 'price-discount';
             price.textContent = parseInt(price.textContent)*0.95 + 'Р'; 
         });
