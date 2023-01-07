@@ -25,3 +25,17 @@
   opacity: 1;
   transition: .3s;
 }
+
+.modal__closeBtn{
+  position: absolute;
+  right: 0;
+  top: 0;
+
+  border: none;
+  background: none;
+  cursor: pointer;
+
+  height: 2rem;
+  width: 2rem;
+}
+.modal__closeBtn:hover{opacity: 0.5;}

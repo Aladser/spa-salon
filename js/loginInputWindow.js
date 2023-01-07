@@ -5,8 +5,8 @@ if(errorMessage.includes('Пользователя не существует') |
 errorContainer.textContent = errorContainer.textContent.replace('-', '');
 
 // кнопка отмены
-let cancelBtn = document.querySelector('.loginWindow__cancelBtn');
-if(cancelBtn) cancelBtn.onclick = () => {
+let closeLoginWindowBtn = document.querySelector('#loginWindow__closeBtn');
+if(closeLoginWindowBtn) closeLoginWindowBtn.onclick = () => {
     document.querySelector('#loginInputSection').className = 'modal';
     window.open("../index.php", "_self")
 };
