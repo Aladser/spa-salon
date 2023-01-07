@@ -1,5 +1,6 @@
 <section id='loginInputSection' class='modal'>
     <div class='loginWindow'><form method="POST" action='../scriptes/auth.php'>
+        <input type="button" class='loginWindow__cancelBtn' value='x'>
         <h3 class='loginWindow__header'> Авторизация</h3>
         <div class='loginWindow__formRow'>
             <label for="loginInput" class='loginWindow__label'>Логин:</label>
@@ -12,7 +13,7 @@
         </div>
         <div class='loginWindow__formRow loginWindow__btnRow'> 
             <input type="submit" class='loginWindow__Btn loginWindow__loginBtn' value='Войти'> 
-            <input type="button" class='loginWindow__Btn loginWindow__cancelBtn' value='Отмена'> 
+             
         </div>
 
         <p class='loginWindow__error'><?="$nouser-$wrongPassword"?></p>
