@@ -12,23 +12,7 @@
   justify-content: center;
   align-items: center;
 }
-  
-.birthdaySendWindow__closeBtn {
-  position: absolute;
-  right: 0;
-  top: 0;
 
-  border: none;
-  background: none;
-  cursor: pointer;
-
-  height: 2rem;
-  width: 2rem;
-}
-.birthdaySendWindow__closeBtn:hover {
-  opacity: 0.3;
-}
-  
 .birthdaySendWindow__title {
   font-size: 1.2rem;
   text-transform: uppercase;

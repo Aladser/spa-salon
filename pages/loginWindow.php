@@ -1,6 +1,6 @@
 <section id='loginInputSection' class='modal'>
     <div class='loginWindow'><form method="POST" action='../scriptes/auth.php'>
-        <input type='button' class='modal__closeBtn' id='loginWindow__closeBtn' value='x'>
+        <button class='modal__closeBtn' id='loginWindow__closeBtn'>x</button>
         <h3 class='loginWindow__header'> Авторизация</h3>
         <div class='loginWindow__formRow'>
             <label for="loginInput" class='loginWindow__label'>Логин:</label>

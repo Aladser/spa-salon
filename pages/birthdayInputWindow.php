@@ -1,6 +1,6 @@
 <section id='birthdayInputSection' class='modal'>
     <div class="birthdaySendWindow">
-        <button class="birthdaySendWindow__closeBtn">x</button>
+        <button class='modal__closeBtn' id='birthdaySendWindow__closeBtn'>x</button>
         <h1 class="birthdaySendWindow__title">Введите вашу дату рождения</h1>
         <form method='POST' class='birthdaySendWindow__body'>
             <input type="date" name='birthday' name class='birthdaySendWindow__birthdayInput'>
