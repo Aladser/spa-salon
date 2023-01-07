@@ -4,12 +4,9 @@ let errorMessage = errorContainer.textContent.split('-');
 if(errorMessage.includes('Пользователя не существует') || errorMessage.includes('Неверный пароль')) loginInputWindow.className = 'modal modal_active';
 errorContainer.textContent = errorContainer.textContent.replace('-', '');
 
-// кнопка отмены
+// кнопка закрытия окна
 let closeLoginWindowBtn = document.querySelector('#loginWindow__closeBtn');
-if(closeLoginWindowBtn) closeLoginWindowBtn.onclick = () => {
-    document.querySelector('#loginInputSection').className = 'modal';
-    window.open("../index.php", "_self")
-};
+if(closeLoginWindowBtn) closeLoginWindowBtn.onclick = () => document.querySelector('#loginInputSection').className = 'modal';
 
 let loginBtn = document.querySelector('.loginWindow__loginBtn');
 let loginInput = document.querySelector('.loginWindow__loginInput');
