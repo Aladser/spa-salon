@@ -8,12 +8,13 @@ errorContainer.textContent = errorContainer.textContent.replace('-', '');
 let closeLoginWindowBtn = document.querySelector('#loginWindow__closeBtn');
 if(closeLoginWindowBtn) closeLoginWindowBtn.onclick = () => document.querySelector('#loginInputSection').className = 'modal';
 
-let loginBtn = document.querySelector('.loginWindow__loginBtn');
+let loginBtn = document.querySelector('#loginWindow__sendBtn');
 let loginInput = document.querySelector('.loginWindow__loginInput');
 let passwordInput = document.querySelector('.loginWindow__passwordInput');
 
 if(loginBtn){
-    const checkFields = () => loginBtn.disabled = loginInput.value!=='' && passwordInput.value!=='' ? false : true; // проверка полей на пустоту
+    // проверка полей на пустоту
+    const checkFields = () => loginBtn.disabled = loginInput.value!=='' && passwordInput.value!=='' ? false : true;
     checkFields();
     loginInput.addEventListener('input', checkFields);
     passwordInput.addEventListener('input', checkFields);

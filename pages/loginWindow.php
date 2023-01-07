@@ -12,7 +12,7 @@
             <input type="password" class='loginWindow__input loginWindow__passwordInput' name='password' id='password-input' autocomplete='off' value= <?= $wrongPassword || $nouser ? '' : 'antonova_da' ?>>
         </div>
         <div class='loginWindow__formRow loginWindow__btnRow'> 
-            <input type='submit' class='loginWindow__btn' value='Войти'>
+            <input type='submit' class='loginWindow__btn' id='loginWindow__sendBtn' value='Войти'>
             <input type='button' class='loginWindow__btn' value='Регистрация'>            
         </div>
 

@@ -10,8 +10,6 @@ const endDiscountTime = parseInt(json['endDiscount']); // конец суточ�
 const exitCount = parseInt(json['exit']); //** число выходов активного пользователя из личного кабинета */
 const visitCount = json['visit']; /** число обновлений страницы активным пользователем */
 
-console.log(auth);
-
 // кнопка входа-выхода в шапке главной страницы
 document.querySelector('.header__btn').onclick = function(){
     if(this.value=='Войти') loginInputWindow.className = 'modal modal_active';

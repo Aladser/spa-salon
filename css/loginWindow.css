@@ -42,6 +42,7 @@
     width: 6.5rem;
     padding: 0.4rem;
 }
+.loginWindow__btn:hover:not(:disabled){opacity: 0.5;}
 
 .loginWindow__error{
     margin-top: 1vh;
