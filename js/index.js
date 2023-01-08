@@ -60,6 +60,6 @@ if(auth && nowTime<endDiscountTime && ((visitCount>1 && !birthday) || visitCount
 }
 
 //***** Кнопка показа номера *****
-let callBtn = document.querySelector('.btn-call');
+let callBtn = document.querySelector('.visit-card__btn');
 callBtn.onmouseover = function() {this.value = '8 (421) 299-99-99';};
 callBtn.onmouseout = function(){this.value = 'Позвонить';};

@@ -1,0 +1,50 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+main{margin-top: 3vh;}
+
+.newUserForm{
+    padding-top: 3rem;
+    border: 2px dotted rgb(200, 200, 200);
+    width: 33%;
+    margin: auto;
+}
+
+.newUserForm__header{
+    text-align: center;
+    padding-bottom: 1rem;
+}
+
+.newUserForm__row{
+    width: 60%;
+    margin: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 0.5rem 0;
+
+}
+.newUserForm__error{
+    padding: 1.25vh 0;
+    text-align: center;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+    
+    visibility:hidden;
+}
+
+.newUserForm__label{width: 3vw;}
+
+.newUserForm__btn{
+    background: none;
+    border: 1px solid black;
+
+    width: 5vw;
+    padding: 0.5rem;
+}
+.newUserForm__regBtn{margin-right: 1rem;}
+.newUserForm__backBtn{margin-left: 1rem;}

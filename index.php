@@ -16,6 +16,7 @@
     $json['birthday'] = $_SESSION[$login]['birthday'] ?? 0;
     $json['exit'] = $_SESSION[$login]['exit'];
     $json['visit'] =  $_SESSION[$login]['visit'];
+    
     // var_dump($_SESSION);
 ?>
 
@@ -54,7 +55,7 @@
         <p class='visit-card__company-name'> На Чиле </p>
         <p class='visit-card__address'>Спа-Салон (г.Благовещенск, ул.Пролетарская, д.5)</p>
         <p class='visit-card__schedule'>Круглосуточно</p>
-        <input type="button" class='btn btn-call' value="Позвонить">
+        <input type="button" class='visit-card__btn' value="Позвонить">
     </section>
     <!-- контейнер числа дней до ДР -->
     <p class='discount discountBirthday'></p>
