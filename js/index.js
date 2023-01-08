@@ -1,18 +1,16 @@
-/** модальное окно аутентификации */ let loginInputWindow = document.querySelector('#loginInputSection');
-/** модальное окно ввода даты рождения */ let birthdayInputWindow = document.querySelector('#birthdayInputSection');
- 
-/** JSON от сервера */ const json = JSON.parse(document.querySelector('#data-php').getAttribute('data-json'));
-const auth = json['auth']; // авторизация
+// ***** JSON от сервера ***** 
+const json = JSON.parse(document.querySelector('#data-php').getAttribute('data-json'));
+/** флаг авторизации */ const auth = json['auth']; 
 const login = json['login']; // логин
 const authTime = json['authtime']; // время авторизации
 const birthday = parseInt(json['birthday']); // ДР
 const endDiscountTime = parseInt(json['endDiscount']); // конец суточной скидки
-const exitCount = parseInt(json['exit']); //** число выходов активного пользователя из личного кабинета */
-const visitCount = json['visit']; /** число обновлений страницы активным пользователем */
+/** число сессий пользователя */ const exitCount = parseInt(json['exit']);
+/** число обновлений страниц пользователем*/ const visitCount = json['visit'];
 
 // кнопка входа-выхода в шапке главной страницы
 document.querySelector('.header__btn').onclick = function(){
-    if(this.value=='Войти') loginInputWindow.className = 'modal modal_active';
+    if(this.value=='Войти') document.querySelector('#loginInputSection').className = 'modal modal_active';
     else window.open("../scriptes/exit.php", "_self");
 };
 

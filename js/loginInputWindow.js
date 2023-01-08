@@ -1,7 +1,8 @@
 // вывод ошибки ввода логина или пароля
 let errorContainer = document.querySelector('.loginWindow__error');
 let errorMessage = errorContainer.textContent.split('-');
-if(errorMessage.includes('Пользователя не существует') || errorMessage.includes('Неверный пароль')) loginInputWindow.className = 'modal modal_active';
+if(errorMessage.includes('Пользователя не существует') || errorMessage.includes('Неверный пароль')) 
+    document.querySelector('#loginInputSection').className = 'modal modal_active';
 errorContainer.textContent = errorContainer.textContent.replace('-', '');
 // кнопка закрытия окна
 let closeLoginWindowBtn = document.querySelector('#loginWindow__closeBtn');
