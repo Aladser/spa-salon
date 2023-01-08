@@ -2,17 +2,11 @@
     $users = []; // словарь 'логин - пароль'
     $dbFileName = '../resources/users.data'; // путь к файлу DB
     $db = file($dbFileName); // файл DB
-
     // сформировать массив пользователей и их паролей из файла
-    function getUsersList(){
-        global $users;
-        global $db;
-        foreach ($db as $user){
-            $line = explode(':', $user);
-            $users[trim($line[0])] = trim($line[1]); 
-        }
+    foreach ($db as $user){
+        $line = explode(':', $user);
+        $users[trim($line[0])] = trim($line[1]); 
     }
-    getUsersList();
 
     // запись пользователя в файл DB
     function writeToDB($login, $password){
@@ -20,6 +14,7 @@
         $hash = md5($password);
         $str = PHP_EOL."$login : $hash";
         file_put_contents($dbFileName, $str, FILE_APPEND);
+        $users[$login] = $hash;
     }
 
     // проверяет существование пользователя
