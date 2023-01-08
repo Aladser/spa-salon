@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<?php 
-    session_start();
-    $newUserExists = isset($_SESSION['newLoginExists']) ? 'true':'false';
-?>
+<?php session_start()?>
 
 <head>
     <meta charset="UTF-8">
@@ -19,13 +15,17 @@
 <main>
     <form class='newUserForm' method="POST" action='../scriptes/reg.php'>
         <h3 class='newUserForm__header'>Регистрация нового пользователя</h3>
-        <div class='newUserForm__row'><p class='newUserForm__label'>Логин:</p><input type="text" name='newLogin'></div>
+        <div class='newUserForm__row'>
+            <p class='newUserForm__label'>Логин:</p>
+            <input type="text" class='newUserForm__loginInput' name='newLogin'>
+        </div>
         <div class='newUserForm__row'><p class='newUserForm__label'>Пароль:</p><input type="password" name='newPassword'></div>
         <div class='newUserForm__row newUserForm__btnrow'>
             <input type="submit" class='newUserForm__btn newUserForm__regBtn' value="Регистрация">
             <input type="button" class='newUserForm__btn newUserForm__backBtn' id='newPassword__backBtn' value="Назад">
         </div>
-        <p class='newUserForm__error'><?=$newUserExists?></p>
+        <p class='newUserForm__error' data-newLogin = <?=$_SESSION['newLoginExists']??null?>></p>
+        <?php unset($_SESSION['newLoginExists']) ?>
     </form>
 </main>
 <script type='text/javascript' src='../js/registration.js'></script>
