@@ -10,7 +10,6 @@
 <body>
     <h3>Список пользователей</h3>
     <?php
-        include '..//scriptes/db.php';
         foreach($users as $key=>$value) echo "$key:    $value<br>";
     ?>
 

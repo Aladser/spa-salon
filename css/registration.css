@@ -46,5 +46,6 @@ main{margin-top: 3vh;}
     width: 5vw;
     padding: 0.5rem;
 }
+.newUserForm__btn:hover:not(:disabled){opacity: 0.5;}
 .newUserForm__regBtn{margin-right: 1rem;}
 .newUserForm__backBtn{margin-left: 1rem;}
