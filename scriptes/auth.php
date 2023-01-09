@@ -1,13 +1,13 @@
 <?php
-    include 'db.php';
+    include 'DBControl.php';
     session_start();
 
     $login = $_POST['login'] ?? null;
     $password = $_POST['password'] ?? null;
 
     // переходы на другие сайты
-    if(existsUser($login)){
-        if(checkPassword($login, $password)){
+    if(DBControl::existsUser($login)){
+        if(DBControl::checkPassword($login, $password)){
             $_SESSION['auth'] = true; // флаг аутентицикации
             $_SESSION['authTime'] = time(); // время авторизации
         }     
