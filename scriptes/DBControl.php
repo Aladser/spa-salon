@@ -1,37 +1,39 @@
 <?php
     /** Класс управления файловой БД */
-    abstract class DBControl{
-        private static $dbFileName = '../resources/users.data';
+    class DBControl{
+        private $dbFilename;
+        private $dbFile;
+        private $users;
 
-        private static function getDBFile(){
-            return file(DBControl::$dbFileName);
+        function __construct($dbFilename){
+            $this->dbFilename = $dbFilename;
+            $this->dbFile = file($dbFilename);
+            $this->users = $this->getUsersList();
         }
+
         // массив пользователей и их паролей из файла
-        public static function getUsersList(){
+        private function getUsersList(){
             $users = [];
-            $dbFile = DBControl::getDBFile();
-            foreach ($dbFile as $user){
+            foreach ($this->dbFile as $user){
                 $line = explode(':', $user);
                 $users[trim($line[0])] = trim($line[1]); 
             }
             return $users;
         }
         // запись пользователя в файл DB
-        public static function writeToDB($login, $password){
-            $dbFile = DBControl::getDBFile();
+        function writeToDB($login, $password){
             $hash = md5($password);
             $str = PHP_EOL."$login : $hash";
-            file_put_contents(DBControl::$dbFileName, $str, FILE_APPEND);
-            $users[$login] = $hash;
+            file_put_contents($this->dbFilename, $str, FILE_APPEND);
+            $this->users[$login] = $hash;
         }
         // проверяет существование пользователя
-        public static function existsUser($login){
-            return array_key_exists($login, DBControl::getUsersList());
+        function existsUser($login){
+            return array_key_exists($login, $this->getUsersList());
         }
         // аутентификация
-        public static function checkPassword($login, $password){
-            $users = DBControl::getUsersList();
-            return DBControl::existsUser($login) ? $users[$login] === md5($password) : false;   
+        function checkPassword($login, $password){
+            return $this->existsUser($login) ? $this->users[$login] === md5($password) : false;   
         }       
     }
 ?>

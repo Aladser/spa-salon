@@ -17,11 +17,14 @@
             <h3 class='newUserForm__header'>Регистрация нового пользователя</h3>
             <div class='newUserForm__row'>
                 <p class='newUserForm__label'>Логин:</p>
-                <input type="text" class='newUserForm__loginInput' name='newLogin'>
+                <input type="text" id='newUserForm__loginInput' name='newLogin'>
             </div>
-            <div class='newUserForm__row'><p class='newUserForm__label'>Пароль:</p><input type="password" name='newPassword'></div>
+            <div class='newUserForm__row'>
+                <p class='newUserForm__label'>Пароль:</p>
+                <input type="password" id='newUserForm__passwordInput' name='newPassword'>
+            </div>
             <div class='newUserForm__row newUserForm__btnrow'>
-                <input type="submit" class='newUserForm__btn newUserForm__regBtn' value="Регистрация">
+                <input type="submit" class='newUserForm__btn newUserForm__regBtn' value="Регистрация" disabled>
                 <input type="button" class='newUserForm__btn newUserForm__backBtn' id='newPassword__backBtn' value="Назад">
             </div>
             <p class='newUserForm__error' data-newLogin = <?=$_SESSION['newLoginExists']??null?>></p>

@@ -1,16 +1,17 @@
 <?php
     include 'DBControl.php';
+    $dbCtrl = new DBControl('../resources/users.data');
     session_start();
     
     $newLogin = $_POST['newLogin'];
     $newPassword = $_POST['newPassword'];
 
-    if(DBControl::existsUser($newLogin)){ 
+    if($dbCtrl->existsUser($newLogin)){ 
         $_SESSION['newLoginExists'] = $newLogin;
         $redirect = 'Location: ../pages/registrationWindow.php';
     }
     else {
-        DBControl::writeToDB($newLogin, $newPassword);
+        $dbCtrl->writeToDB($newLogin, $newPassword);
         $_SESSION['auth'] = true; // флаг аутентицикации
         $_SESSION['authTime'] = time(); // время авторизации
         $_SESSION['login'] = $newLogin;
@@ -18,7 +19,7 @@
     }
 
     // удаление переменной из сессии, если ранее сохранена в сессии
-    if(!DBControl::existsUser($newLogin) && isset($_SESSION['newLoginExists'])) unset($_SESSION['newLoginExists']);
+    if(!$dbCtrl->existsUser($newLogin) && isset($_SESSION['newLoginExists'])) unset($_SESSION['newLoginExists']);
     
     header($redirect);
 ?>
