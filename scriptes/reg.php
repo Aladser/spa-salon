@@ -12,6 +12,7 @@
         writeToDB($newLogin, $newPassword);
         $_SESSION['auth'] = true; // флаг аутентицикации
         $_SESSION['authTime'] = time(); // время авторизации
+        $_SESSION['login'] = $newLogin;
         $redirect = 'Location: ../index.php';
     }
 
