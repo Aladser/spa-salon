@@ -36,4 +36,6 @@
             return $this->existsUser($login) ? $this->users[$login] === md5($password) : false;   
         }       
     }
+
+    $dbCtrl = new DBControl('../resources/users.data');
 ?>

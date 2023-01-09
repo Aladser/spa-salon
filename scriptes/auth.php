@@ -1,6 +1,5 @@
 <?php
-    include 'DBControl.php';
-    $dbCtrl = new DBControl('../resources/users.data');
+    include '../scriptes/DBControl.php';
     session_start();
 
     $login = $_POST['login'] ?? null;
