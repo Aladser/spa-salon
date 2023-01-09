@@ -4,11 +4,19 @@
     $newLogin = $_POST['newLogin'];
     $newPassword = $_POST['newPassword'];
 
-    if(existsUser($newLogin)) $_SESSION['newLoginExists'] = $newLogin;
-    else writeToDB($newLogin, $newPassword);
+    if(existsUser($newLogin)){ 
+        $_SESSION['newLoginExists'] = $newLogin;
+        $redirect = 'Location: ../pages/registrationWindow.php';
+    }
+    else {
+        writeToDB($newLogin, $newPassword);
+        $_SESSION['auth'] = true; // флаг аутентицикации
+        $_SESSION['authTime'] = time(); // время авторизации
+        $redirect = 'Location: ../index.php';
+    }
 
-    // удаление переменной из сессии, если третья регистрация существующего пользователя 
+    // удаление переменной из сессии, если ранее сохранена в сессии
     if(!existsUser($newLogin) && isset($_SESSION['newLoginExists'])) unset($_SESSION['newLoginExists']);
     
-    header('Location: ../pages/registrationWindow.php');
+    header($redirect);
 ?>
