@@ -5,6 +5,7 @@
     font-family: Arial, Helvetica, sans-serif;
     width: 30%;
     margin: auto;
+    margin-bottom: 2vh;
     cursor: default;
 }
 
@@ -21,4 +22,21 @@
     cursor: pointer;
     background-color: rgb(201, 201, 201);
     color: white;
+}
+
+.btnBlock{
+    width: 20%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+}
+.btnBlock__btn{
+    background: none;
+    border: 1px solid black;
+    padding: 1vh 2vw;
+    width: 8vw;
+}
+.btnBlock__btn:hover:not(:disabled){
+    cursor: pointer;
+    opacity: 0.6;
 }
