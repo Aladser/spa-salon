@@ -17,14 +17,14 @@
                 <?php
                     foreach($dbCtrl->getUsersList() as $key => $value){
                         echo "<tr class='usersTable__user'>";
-                        echo "<td>$key</td><td>$value</td>";
+                        echo "<td id='usersTable__login'>$key</td><td>$value</td>";
                         echo '</tr>';
                     }
                 ?>
             </table>
             <div class='btnBlock'>
                 <input type="button" class='btnBlock__btn' id='addBtn' value="Добавить" disabled>
-                <input type="button" class='btnBlock__btn' id='deleteBtn' value="Удалить" disabled>
+                <input type="button" class='btnBlock__btn' id='deleteBtn' value="Удалить">
             </div>
         </section>
         <script type='text/javascript' src='../js/admin.js'></script>

@@ -20,17 +20,33 @@
             }
             return $users;
         }
-        // запись пользователя в файл DB
+
+        // добавить пользователя в файл DB
         function writeToDB($login, $password){
             $hash = md5($password);
             $str = PHP_EOL."$login : $hash";
             file_put_contents($this->dbFilename, $str, FILE_APPEND);
             $this->users[$login] = $hash;
         }
+
+        // удалить пользователя из файла БД
+        function removeUser($login){
+            foreach($this->dbFile as $line){
+                if(str_contains($line, $login)){
+                    $remline = $line;
+                    break;
+                }
+            }
+            $content = file_get_contents($this->dbFilename);
+            $content = str_replace($remline, '', $content);
+            file_put_contents($this->dbFilename, $content);
+        }
+
         // проверяет существование пользователя
         function existsUser($login){
             return array_key_exists($login, $this->getUsersList());
         }
+        
         // аутентификация
         function checkPassword($login, $password){
             return $this->existsUser($login) ? $this->users[$login] === md5($password) : false;   
