@@ -18,7 +18,7 @@ const visitCount = json['visit'];
 // кнопка входа-выхода в шапке главной страницы
 document.querySelector('.header__btn').onclick = function(){
     if(this.value=='Войти') document.querySelector('#loginInputSection').className = 'modal modal_active';
-    else window.open("../scriptes/exit.php", "_self");
+    else location.href = '../scriptes/exit.php';
 };
 // Формирование имени пользователя и местного времени входа
 document.querySelector('.header__user').textContent = auth ? `Здравствуйте,${login} (Время входа: ${getLocalHoursAndMinutes(authTime)})` : 'Здравствуйте, Гость!';

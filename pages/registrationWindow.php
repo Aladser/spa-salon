@@ -13,7 +13,7 @@
 
 <body>
     <main>
-        <form class='newUserForm' method="POST" action='../scriptes/registration.php'>
+        <form class='newUserForm' method="POST" action='../scriptes/addUser.php'>
             <h3 class='newUserForm__header'>Регистрация нового пользователя</h3>
             <div class='newUserForm__row'>
                 <p class='newUserForm__label'>Логин:</p>

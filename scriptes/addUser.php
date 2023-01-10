@@ -13,7 +13,7 @@
         $dbCtrl->addUser($newLogin, $newPassword);
         $_SESSION['auth'] = true; // флаг аутентицикации
         $_SESSION['authTime'] = time(); // время авторизации
-        $_SESSION['login'] = $newLogin;
+        $_SESSION['login'] = $newLogin; // логин
         $redirect = 'Location: ../index.php';
     }
 
