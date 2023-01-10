@@ -10,7 +10,7 @@
         $redirect = 'Location: ../pages/registrationWindow.php';
     }
     else {
-        $dbCtrl->writeToDB($newLogin, $newPassword);
+        $dbCtrl->addUser($newLogin, $newPassword);
         $_SESSION['auth'] = true; // флаг аутентицикации
         $_SESSION['authTime'] = time(); // время авторизации
         $_SESSION['login'] = $newLogin;

@@ -22,24 +22,24 @@
         }
 
         // добавить пользователя в файл DB
-        function writeToDB($login, $password){
+        function addUser($login, $password){
             $hash = md5($password);
-            $str = PHP_EOL."$login : $hash";
+            $str = "$login : $hash".PHP_EOL;
             file_put_contents($this->dbFilename, $str, FILE_APPEND);
             $this->users[$login] = $hash;
         }
 
         // удалить пользователя из файла БД
         function removeUser($login){
-            foreach($this->dbFile as $line){
-                if(str_contains($line, $login)){
-                    $remline = $line;
+            for($i=0; $i<sizeof($this->dbFile); $i++){
+                if(str_contains($this->dbFile[$i], $login)){
+                    $content = file_get_contents($this->dbFilename);
+                    $content = str_replace($this->dbFile[$i], '', $content);
+                    file_put_contents($this->dbFilename, $content);
                     break;
                 }
             }
-            $content = file_get_contents($this->dbFilename);
-            $content = str_replace($remline, '', $content);
-            file_put_contents($this->dbFilename, $content);
+
         }
 
         // проверяет существование пользователя
