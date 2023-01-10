@@ -1,5 +1,6 @@
 const users = document.querySelectorAll('.usersTable__user');
 const deleteBtn = document.querySelector('#deleteBtn');
+const clearSelectedUser = () => users.forEach(user => user.className = 'usersTable__user');
 
 users.forEach(user => {
     user.onclick = () => {
@@ -14,5 +15,3 @@ users.forEach(user => {
         }   
     }
 });
-
-const clearSelectedUser = () => users.forEach(user => user.className = 'usersTable__user');
