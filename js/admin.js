@@ -1,11 +1,17 @@
-// выделение строки или удаление выделения при клике
 let users = document.querySelectorAll('.usersTable__user');
 let deleteBtn = document.querySelector('#deleteBtn');
-const clearSelectUser = () => users.forEach(user => user.className = 'usersTable__user');
+
+// убрать существующее выделение другой строки
+function clearSelectedUser(){
+    let selectedUser = document.querySelector('.usersTable__user_active');
+    if(selectedUser) selectedUser.className = 'usersTable__user';
+}
+
+// выделение строки или удаление выделения при клике
 for(let i=0; i<users.length; i++){
     users[i].onclick = ()=>{
         if(users[i].className==='usersTable__user'){
-            clearSelectUser();
+            clearSelectedUser();
             users[i].className = 'usersTable__user usersTable__user_active';
             deleteBtn.disabled = false;    
         }
