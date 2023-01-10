@@ -1,5 +1,5 @@
 let users = document.querySelectorAll('.usersTable__user');
-let deleteBtn = document.querySelector('#btnBlock__deleteBtn');
+let deleteBtn = document.querySelector('.btnBlock__deleteBtn');
 
 // переключить видимость
 function toggleSelection(elem){
@@ -29,4 +29,4 @@ deleteBtn.onclick = ()=>{
 };
 
 // Кнопка назад
-document.querySelector('#btnBlock__backBtn').onclick = () => location.href = '../index.php';
+document.querySelector('.btnBlock__backBtn').onclick = () => location.href = '../index.php';

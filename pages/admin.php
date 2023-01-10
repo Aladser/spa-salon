@@ -10,7 +10,7 @@
     </head>
     <body>
         <header><h3 class='tableTitle'>Список пользователей</h3></header>
-        <section>
+        <section class='container'>
             <?php include '../scriptes/DBControl.php' ?>
             <table class='usersTable'>
                 <tr><th>Пользователь</th><th>Пароль</th></tr>
@@ -23,8 +23,8 @@
                 ?>
             </table>
             <div class='btnBlock'>
-                <input type="button" class='btnBlock__btn' id='btnBlock__deleteBtn' value="Удалить" disabled>
-                <input type="button" class='btnBlock__btn' id='btnBlock__backBtn' value="Назад">
+                <input type="button" class='btnBlock__btn btnBlock__deleteBtn' value="Удалить" disabled>
+                <input type="button" class='btnBlock__btn btnBlock__backBtn' value="Назад">
             </div>
         </section>
         <script type='text/javascript' src='../js/admin.js'></script>

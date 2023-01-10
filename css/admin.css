@@ -1,11 +1,17 @@
-.tableTitle{text-align: center;}
+.container{
+    display: flex;
+    justify-content: center;
+}
+
+.tableTitle{
+    text-align: center;
+    margin-left: -7vw;
+}
 
 .usersTable{
     border-collapse: collapse;
     font-family: Arial, Helvetica, sans-serif;
     width: 30%;
-    margin: auto;
-    margin-bottom: 2vh;
     cursor: default;
 }
 
@@ -25,18 +31,21 @@
 }
 
 .btnBlock{
-    width: 20%;
-    margin: auto;
-    display: flex;
-    justify-content: space-around;
+    width: 8vw;
+    padding: 0.2rem 0.5rem;
 }
 .btnBlock__btn{
     background: none;
     border: 1px solid black;
     padding: 1vh 2vw;
     width: 8vw;
+    height: 4vh;
+    font-size: 1rem;
 }
 .btnBlock__btn:hover:not(:disabled){
     cursor: pointer;
     opacity: 0.6;
+}
+.btnBlock__deleteBtn{
+    margin-bottom: 0.5rem;
 }
