@@ -1,5 +1,5 @@
 <?php
-    include '../scriptes/DBControl.php';
+    include 'DBControl.php';
     session_start();
     
     $newLogin = $_POST['newLogin'];

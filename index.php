@@ -58,7 +58,7 @@
         <input type="button" class='visit-card__btn' value="Позвонить">
     </section>
     <!-- Панель администратора -->
-    <a href="../scriptes/DBControl.php" class='adminPanelRef'>Панель администратора</a>
+    <a href="../pages/admin.php" class='adminPanelRef'>Панель администратора</a>
     <!-- контейнер числа дней до ДР -->
     <p class='discount discountBirthday'></p>
     <!-- индивидуальная скидка -->

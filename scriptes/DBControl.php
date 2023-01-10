@@ -12,7 +12,7 @@
         }
 
         // массив пользователей и их паролей из файла
-        private function getUsersList(){
+        function getUsersList(){
             $users = [];
             foreach ($this->dbFile as $user){
                 $line = explode(':', $user);
