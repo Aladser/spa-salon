@@ -23,8 +23,8 @@
                 ?>
             </table>
             <div class='btnBlock'>
-                <input type="button" class='btnBlock__btn' id='addBtn' value="Добавить" disabled>
-                <input type="button" class='btnBlock__btn' id='deleteBtn' value="Удалить">
+                <input type="button" class='btnBlock__btn' id='btnBlock__deleteBtn' value="Удалить" disabled>
+                <input type="button" class='btnBlock__btn' id='btnBlock__backBtn' value="Назад">
             </div>
         </section>
         <script type='text/javascript' src='../js/admin.js'></script>
