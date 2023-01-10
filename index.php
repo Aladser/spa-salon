@@ -16,8 +16,9 @@
     $json['birthday'] = $_SESSION[$login]['birthday'] ?? 0;
     $json['exit'] = $_SESSION[$login]['exit'];
     $json['visit'] =  $_SESSION[$login]['visit'];
+    unset($_SESSION[""]);
     
-    // var_dump($_SESSION);
+    //var_dump($_SESSION);
 ?>
 
 <head>
