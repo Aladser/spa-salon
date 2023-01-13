@@ -31,7 +31,6 @@ callBtn.onmouseout = function(){this.value = 'Позвонить';};
 if(login!=='admin')
 {
     // ***** Отображение счетчика числа дней до ДР при следующем входе *****
-    // не отображается у admin
     let birthdayDiscount = document.querySelector('.discountBirthday');
     let leftDays = birthday>0 ? formatTimeInterval(birthday-getDateNowInSeconds()).get('days') : -1;
     if(birthday>0)
@@ -41,8 +40,8 @@ if(login!=='admin')
         birthdayDiscount.style.display = 'flex';
         // если др сегодня
         if(leftDays == 0){
-            document.querySelectorAll('.price').forEach( price => {
-                price.className = 'price-discount';
+            document.querySelectorAll('.service__price').forEach( price => {
+                price.className = 'service__price-discount';
                 price.textContent = parseInt(price.textContent)*0.95 + 'Р'; 
             });
         }

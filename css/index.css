@@ -4,7 +4,10 @@
     overflow-x: hidden;
 }
 body{padding: 0.25rem;}
-main{position:relative}
+main{
+    position:relative;
+    overflow-y: hidden;
+}
 a{text-decoration: none;}
 
 /* шапка */
@@ -179,13 +182,12 @@ a{text-decoration: none;}
     text-align: center;
     width: 60%;
     margin: auto;
-    padding: 1rem 0rem;
-    border-right: 3px dotted blueviolet;
-    border-left: 3px dotted blueviolet;
 }
 
 .visit-card{
     height: 20vw;
+    width: 99.5%;
+    margin: auto;
     font-family:Arial, Helvetica, sans-serif;
     background: url(/img/salon.jpg) no-repeat;
     background-size: cover;
@@ -274,7 +276,7 @@ a{text-decoration: none;}
 .service__pricelist li{margin-bottom: 1vh;}
 
 /* показ скидки */
-.price-discount::after{
+.service__price-discount::after{
     content: '-5%';
     background-color: rgb(175, 0, 0);
     color: white;
@@ -319,3 +321,41 @@ a{text-decoration: none;}
 .adminPanelRef:hover{
     opacity: 0.75;
 }
+
+/* анимация полос */
+.stripes{
+    height: 400vh;
+    width: 60.5vw;
+    left: 19vw;
+    border-left: 3px dotted blueviolet;
+    border-right: 3px dotted blueviolet;
+    position: absolute;
+    top: -90rem;
+    z-index: -1000;
+
+    animation-duration: 2s;
+    animation-name: stripe-moving;
+    animation-iteration-count: infinite;
+    animation-delay: 0;
+}
+
+@keyframes stripe-moving {
+    0% {
+        top: -89rem;
+    }
+    25%{
+        top: -88rem;
+    }
+  
+    50%{
+        top: -87rem;
+    }
+    75%{
+        top: -86rem;
+    }
+
+    100% {
+        top: -85rem;
+    }
+  }
+
