@@ -6,9 +6,11 @@
     $wrongPassword = isset($_SESSION['wrongpassword']) ? 'Неверный пароль' : null;
 
     $login = $_SESSION['login'] ?? null; // активный пользователь
-    $_SESSION[$login]['visit'] = $_SESSION[$login]['visit'] ?? 0; // число обновлений страницы активным пользователем
-    if($auth) $_SESSION[$login]['visit']++;
-    $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0;
+    if($auth && $login !== 'admin'){
+        $_SESSION[$login]['visit'] = $_SESSION[$login]['visit'] ?? 0; // число обновлений страницы активным пользователем
+        $_SESSION[$login]['visit']++;
+        $_SESSION[$login]['exit'] = $_SESSION[$login]['exit'] ?? 0;
+    }
 
     $json['auth'] = $auth;
     $json['login'] = $login;
@@ -16,9 +18,8 @@
     $json['birthday'] = $_SESSION[$login]['birthday'] ?? 0;
     $json['exit'] = $_SESSION[$login]['exit'];
     $json['visit'] =  $_SESSION[$login]['visit'];
-    unset($_SESSION[""]);
     
-    //var_dump($_SESSION);
+    // var_dump($_SESSION);
 ?>
 
 <head>
