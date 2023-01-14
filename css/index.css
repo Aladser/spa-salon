@@ -188,6 +188,7 @@ a{text-decoration: none;}
     height: 20vw;
     width: 99.5%;
     margin: auto;
+    margin-bottom: 2vh;
     font-family:Arial, Helvetica, sans-serif;
     background: url(/img/salon.jpg) no-repeat;
     background-size: cover;
@@ -333,7 +334,7 @@ a{text-decoration: none;}
     top: -90rem;
     z-index: -1000;
 
-    animation-duration: 2s;
+    animation-duration: 3s;
     animation-name: stripe-moving;
     animation-iteration-count: infinite;
     animation-delay: 0;
@@ -343,15 +344,29 @@ a{text-decoration: none;}
     0% {
         top: -89rem;
     }
+    12%{
+        top: -88.5rem;
+    }
+    
     25%{
         top: -88rem;
+    }
+
+    32%{
+        top: -87.5rem;
     }
   
     50%{
         top: -87rem;
     }
+    62%{
+        top: -86.5rem;
+    }
     75%{
         top: -86rem;
+    }
+    87%{
+        top:  -85.5rem;
     }
 
     100% {
